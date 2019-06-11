@@ -1,0 +1,117 @@
+# 基本は github.com のレポジトリを指定するだけ
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+# git clone 後、実行すべきコマンドがある場合はこんな感じ
+[[plugins]]
+repo = 'Shougo/vimproc.vim'
+hook_post_update = '''
+  if dein#util#_is_windows()
+    let cmd = 'tools\\update-dll-mingw'
+  elseif dein#util#_is_cygwin()
+    let cmd = 'make -f make_cygwin.mak'
+  elseif executable('gmake')
+    let cmd = 'gmake'
+  else
+    let cmd = 'make'
+  endif
+  let g:dein#plugin.build = cmd
+'''
+
+# カーソル移動の高速化
+[[plugins]]
+repo = 'easymotion/vim-easymotion'
+
+# 日本語ヘルプ 70MBあるので削除
+#[[plugins]]
+#repo = 'vim-jp/vimdoc-ja'
+
+#  「囲われているテキスト」には変更を加えず、「テキストを囲うもの(括弧や、'' や "" )」だけを追加、削除、変更する
+[[plugins]]
+repo = 'tpope/vim-surround'
+
+#  gc{motion}を実行するとコメント化／コメント化解除が切り替え
+[[plugins]]
+repo = 'tpope/vim-commentary'
+
+#  フォルダ階層をツリー表示してくれる
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+
+#  行末の半角スペースを可視化
+[[plugins]]
+repo = 'bronson/vim-trailing-whitespace'
+
+#  ステータスラインの見た目をよくする
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+
+#  選択した行またはブロック領域を指定した方向（上/下/右/左）に移動
+[[plugins]]
+repo = 't9md/vim-textmanip'
+
+#  インデントに色をつけてくれる
+[[plugins]]
+repo = 'nathanaelkane/vim-indent-guides' # インデント範囲の色を変えるVer
+# repo = 'Yggdroot/indentLine' # インデントの右端に縦線
+
+# sudo vim のときの不具合をvim sudo:fileNameで解決してくれる
+[[plugins]]
+repo = 'vim-scripts/sudo.vim'
+
+# sのあとに2文字入力でその場所に移動できる
+[[plugins]]
+repo = 'justinmk/vim-sneak'
+
+# 編集中のshellやPythonを実行する <Leader> + r で実行
+[[plugins]]
+repo = 'vim-scripts/quickrun.vim'
+
+# バッファをタブのように表示するプラグイン
+[[plugins]]
+repo = 'fholgado/minibufexpl.vim'
+
+# OSC52を使ってリモートでヤンクした内容をローカルのクリップボードに反映させる
+[[plugins]]
+repo = 'greymd/oscyank.vim' # 1行100文字を974行(97267文字)コピーするとシェルの実行に失敗する(E484 ファイル "/tmp/vacl5tz/12"を開けません")
+# repo = 'haya14busa/vim-poweryank' # 動作がoscyankより重くまた1行100文字を974行(97267文字)コピーするとエラーが出る
+
+# 対称となる括弧をカラフルに表示
+[[plugins]]
+repo = 'kien/rainbow_parentheses.vim'
+
+# 閉じ括弧,閉じクォートを補完
+[[plugins]]
+repo = 'cohama/lexima.vim'
+
+# deinの管理するプラグインの更新状況をUIで表示するプラグイン
+# :DeinUpdate コマンドでプラグインの一括更新
+[[plugins]]
+repo = 'wsdjeg/dein-ui.vim'
+
+# ヤンクした対象をハイライトで明示する
+[[plugins]]
+repo = 'machakann/vim-highlightedyank'
+
+# インデントレベルでのオペレータを可能にするプラグイン
+[[plugins]]
+repo = 'michaeljsmith/vim-indent-object'
+
+# camelCaseやsnake_caseでのモーションを行うプラグイン
+[[plugins]]
+repo = 'bkad/CamelCaseMotion'
+
+# easymotionでcamelCaseやsnake_caseでの移動を行えるようにする拡張プラグイン
+[[plugins]]
+repo = 'aykamko/vim-easymotion-segments'
+
+# Color
+[[plugins]]
+repo = 'tomasr/molokai'
+[[plugins]]
+repo = 'sickill/vim-monokai'
+
+# Nginxのconfファイルをハイライトする
+[[plugins]]
+repo = 'chr4/nginx.vim'
+

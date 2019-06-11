@@ -1,0 +1,4 @@
+#set bell-style audible
+#set prefer-visible-bell
+# bashのエラー音をOFF
+set prefer-visible-bell

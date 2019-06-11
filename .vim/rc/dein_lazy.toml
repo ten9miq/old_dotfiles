@@ -1,0 +1,13 @@
+#  ファイル、バッファ、最近使用したファイル、またはレジスタなどの任意のソースから情報を検索して表示
+[[plugins]]
+repo = 'Shougo/unite.vim'
+
+#  unite.vimでファイルの閲覧履歴を確認するために必要
+[[plugins]]
+repo = 'Shougo/neomru.vim'
+on_source = ['unite.vim']
+
+#  unite.vimでコピー履歴を確認するために必要
+[[plugins]]
+repo = 'Shougo/neoyank.vim'
+on_source = ['unite.vim']
