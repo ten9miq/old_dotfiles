@@ -214,6 +214,8 @@ nnoremap <silent> <leader>y :%y<CR>
 vnoremap <silent> <leader>p "0p<CR>
 " 保存
 nnoremap <silent> <leader>v :w<CR>
+"" w!!でsudoを忘れても保存
+cnoremap w!! w !sudo tee > /dev/null %<CR> :e!<CR>
 
 " 折り返し時に表示行単位での移動できるようにする
 nnoremap j gj
