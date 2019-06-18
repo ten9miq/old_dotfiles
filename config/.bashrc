@@ -11,8 +11,10 @@ __git_complete sg __git_main # g 1文字のあとでもgitの補完を有効に
 # dockerのコマンド補完を有効にするためのshell
 source $HOME/.docker-compose-completion.sh
 complete -F _docker_compose dc # dc のあとでもdocker-composeの補完を有効に
+complete -F _docker_compose sdc # sdc のあとでもdocker-composeの補完を有効に
 source $HOME/.docker-completion.sh
 complete -F _docker d # d 1文字のあとでもdockerの補完を有効に
+complete -F _docker sd # sd 1文字のあとでもdockerの補完を有効に
 complete -cf sudo # sudo入力中にコマンド補完ができるようにする
 
 # tmux上でも256色に対応するための設定
@@ -147,6 +149,8 @@ alias sgla="sg log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%C
 # ------------------------------------
 alias d="docker"
 alias dc="docker-compose"
+alias sd="sudo docker"
+alias sdc="sudo docker-compose"
 
 ### docker container
 # List containers  old:docker ps

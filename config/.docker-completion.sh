@@ -5296,3 +5296,11 @@ eval "$__docker_previous_extglob_setting"
 unset __docker_previous_extglob_setting
 
 complete -F _docker docker docker.exe dockerd dockerd.exe
+
+complete -F _docker_container_exec de
+
+complete -F _docker_container_run drd
+complete -F _docker_container_run drit
+
+complete -F _docker_container_rm drm
+complete -F _docker_image_rm dirm
