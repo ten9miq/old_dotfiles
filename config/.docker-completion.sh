@@ -5295,12 +5295,49 @@ _docker() {
 eval "$__docker_previous_extglob_setting"
 unset __docker_previous_extglob_setting
 
+# Usage:
+#   docker_alias_completion_wrapper <completion function> <alias/function name>
+#
+# Example:
+#   dock-ip() { docker inspect --format '{{ .NetworkSettings.IPAddress }}' $@ ;}
+#   docker_alias_completion_wrapper __docker_complete_containers_running dock-ip
+docker_alias_completion_wrapper(){
+  local completion_function="$1";
+  local alias_name="$2";
+
+  local func=$(cat <<EOT
+    # Generate a new completion function name
+    function _$alias_name() {
+        # Start off like _docker()
+        local previous_extglob_setting=\$(shopt -p extglob);
+        shopt -s extglob;
+
+        # Populate \$cur, \$prev, \$words, \$cword
+        _get_comp_words_by_ref -n : cur prev words cword;
+
+        # Declare and execute
+        declare -F $completion_function >/dev/null && $completion_function;
+
+        eval "\$previous_extglob_setting";
+        return 0;
+    };
+EOT
+  );
+  eval "$func";
+
+  # Register the alias completion function
+  complete -F _$alias_name $alias_name
+}
+
+export -f docker_alias_completion_wrapper
+
+
 complete -F _docker docker docker.exe dockerd dockerd.exe
 
-complete -F _docker_container_exec de
+docker_alias_completion_wrapper __docker_complete_containers_all de
 
-complete -F _docker_container_run drd
-complete -F _docker_container_run drit
+docker_alias_completion_wrapper __docker_complete_containers_all drd
+docker_alias_completion_wrapper __docker_complete_containers_all drit
 
-complete -F _docker_container_rm drm
-complete -F _docker_image_rm dirm
+docker_alias_completion_wrapper __docker_complete_containers_all drm
+docker_alias_completion_wrapper __docker_complete_containers_all dirm

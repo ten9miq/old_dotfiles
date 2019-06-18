@@ -225,9 +225,9 @@ docker_image_remove(){
 docker_exec() {
   if [ "$1" = "" ]
     # 引数なしの場合一番新しいイメージの中に入る
-    docker exec -it $(dlate) /bin/bash
+    docker container exec -it $(dlate) /bin/bash
   then
-    docker exec -it "$1" /bin/bash
+    docker container exec -it $1 /bin/bash
   fi
 }
 
