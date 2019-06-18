@@ -2,3 +2,8 @@
 #set prefer-visible-bell
 # bashのエラー音をOFF
 set prefer-visible-bell
+
+# bashで大文字小文字を無視して補完する
+$if Bash
+set completion-ignore-case on
+$endif
