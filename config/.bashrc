@@ -4,15 +4,15 @@ if [ -f /etc/bashrc ]; then
 fi
 
 # gitのコマンド補完を有効にするためのshell
-source $HOME/dotfiles/shell/.git-completion.sh
+source ./.completion_sh/.git-completion.sh
 __git_complete g __git_main # g 1文字のあとでもgitの補完を有効に
 __git_complete sg __git_main # g 1文字のあとでもgitの補完を有効に
 # 残りのgitのaliasの補完はファイルに直接記載
 # dockerのコマンド補完を有効にするためのshell
-source $HOME/dotfiles/shell/.docker-compose-completion.sh
+source ./.completion_sh/.docker-compose-completion.sh
 complete -F _docker_compose dc # dc のあとでもdocker-composeの補完を有効に
 complete -F _docker_compose sdc # sdc のあとでもdocker-composeの補完を有効に
-source $HOME/dotfiles/shell/.docker-completion.sh
+source ./.completion_sh/.docker-completion.sh
 complete -F _docker d # d 1文字のあとでもdockerの補完を有効に
 complete -F _docker sd # sd 1文字のあとでもdockerの補完を有効に
 complete -cf sudo # sudo入力中にコマンド補完ができるようにする
