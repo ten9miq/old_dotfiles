@@ -40,11 +40,12 @@ else
       git pull
       # # dein.vimのPluginファイルのコピー
       \cp -r .vim ~/
-      if [ -f ~/.bashrc ] ; then
-        # bashファイルの即時反映
-        source ~/.bashrc
-      fi
     fi
     \cd -
   fi
+fi
+
+if [ -f ~/.bashrc ] ; then
+  # 接続時に.bashrcの読み込みの実行
+  source ~/.bashrc
 fi
