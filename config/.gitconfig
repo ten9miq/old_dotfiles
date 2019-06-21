@@ -12,3 +12,5 @@
   grep = auto
 [push]
   default = tracking
+[credential]
+	helper = store
