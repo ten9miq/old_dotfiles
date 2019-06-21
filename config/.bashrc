@@ -4,15 +4,15 @@ if [ -f /etc/bashrc ]; then
 fi
 
 # gitのコマンド補完を有効にするためのshell
-source $HOME/.git-completion.sh
+source $HOME/dotfiles/shell/.git-completion.sh
 __git_complete g __git_main # g 1文字のあとでもgitの補完を有効に
 __git_complete sg __git_main # g 1文字のあとでもgitの補完を有効に
 # 残りのgitのaliasの補完はファイルに直接記載
 # dockerのコマンド補完を有効にするためのshell
-source $HOME/.docker-compose-completion.sh
+source $HOME/dotfiles/shell/.docker-compose-completion.sh
 complete -F _docker_compose dc # dc のあとでもdocker-composeの補完を有効に
 complete -F _docker_compose sdc # sdc のあとでもdocker-composeの補完を有効に
-source $HOME/.docker-completion.sh
+source $HOME/dotfiles/shell/.docker-completion.sh
 complete -F _docker d # d 1文字のあとでもdockerの補完を有効に
 complete -F _docker sd # sd 1文字のあとでもdockerの補完を有効に
 complete -cf sudo # sudo入力中にコマンド補完ができるようにする
@@ -21,7 +21,7 @@ complete -cf sudo # sudo入力中にコマンド補完ができるようにす�
 export TERM=xterm-256color
 
 # ls --color=autoで緑背景の一部が見にくいので文字色を変更
-eval `dircolors ~/.colorrc`
+eval `dircolors .colorrc`
 
 # User specific aliases and functions
 stty stop undef # Ctrl+sでLinuxのターミナルへの出力をロックする機能があるのでそれを無効化する(一応Ctrl+qで抜けれる)

@@ -38,15 +38,13 @@ else
       # 最新じゃない場合には更新処理を行う
       git reset --hard $(git log --pretty=format:%H | head -1)
       git pull
-      ./setup.sh
+      # # dein.vimのPluginファイルのコピー
+      \cp -r .vim ~/
+      if [ -f ~/.bashrc ] ; then
+        # bashファイルの即時反映
+        source ~/.bashrc
+      fi
     fi
     \cd -
   fi
 fi
-
-# Get the aliases and functions
-if [ -f ~/.bashrc ] ; then
-  # bashファイルの即時反映
-  source ~/.bashrc
-fi
-
