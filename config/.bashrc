@@ -69,6 +69,7 @@ alias sudo='sudo '
 alias sudovim='sudo_vim'
 alias sudovi='sudo_vim'
 alias hg='history | grep'
+alias lessf='less -N+F'
 
 # gitコマンド
 alias g='git'
