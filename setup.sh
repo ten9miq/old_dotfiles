@@ -30,9 +30,7 @@ fi
 \cp config/.inputrc ~/
 
 # bashでgitの補完を有効にするためのshell script
-\cp config/.git-completion.sh ~/.git-completion.sh
-\cp config/.docker-completion.sh ~/.docker-completion.sh
-\cp config/.docker-compose-completion.sh ~/.docker-compose-completion.sh
+\cp -r .completion_sh/ ~/
 
 if [ "${OS}" == 'Linux' ] ; then
   echo "OS Linux!!"
