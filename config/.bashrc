@@ -3,16 +3,19 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
-# gitのコマンド補完を有効にするためのshell
-source $HOME/.git-completion.sh
+# bashでコマンド補完を有効にするためのshellの読み込み処理
+COMP_PATH=$HOME/.completion_sh/
+for f in `\find ${COMP_PATH} -maxdepth 1 -type f `; do
+  source $f
+done
+
 __git_complete g __git_main # g 1文字のあとでもgitの補完を有効に
 __git_complete sg __git_main # g 1文字のあとでもgitの補完を有効に
 # 残りのgitのaliasの補完はファイルに直接記載
 # dockerのコマンド補完を有効にするためのshell
-source $HOME/.docker-compose-completion.sh
 complete -F _docker_compose dc # dc のあとでもdocker-composeの補完を有効に
 complete -F _docker_compose sdc # sdc のあとでもdocker-composeの補完を有効に
-source $HOME/.docker-completion.sh
+
 complete -F _docker d # d 1文字のあとでもdockerの補完を有効に
 complete -F _docker sd # sd 1文字のあとでもdockerの補完を有効に
 complete -cf sudo # sudo入力中にコマンド補完ができるようにする
