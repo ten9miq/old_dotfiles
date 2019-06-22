@@ -30,7 +30,9 @@ fi
 \cp config/.inputrc ~/
 
 # bashでgitの補完を有効にするためのshell script
-\cp -r .completion_sh/ ~/
+\cp -r .bash_source_sh/ ~/
+# dein.vimのPluginファイルのコピー
+\cp -r .vim ~/
 
 if [ "${OS}" == 'Linux' ] ; then
   echo "OS Linux!!"
@@ -39,9 +41,6 @@ if [ "${OS}" == 'Linux' ] ; then
   # \cp config/.gitignore ~/
   # \cp config/ssh_config ~/.ssh/config
 fi
-
-# dein.vimのPluginファイルのコピー
-\cp -r .vim ~/
 
 echo ' '
 echo '###############################################################################'
