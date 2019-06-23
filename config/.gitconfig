@@ -1,4 +1,6 @@
 [user]
+	email = ruin.of.messger@gmail.com
+	name = 53JIlLenWe11
 
 [core]
   editor = /usr/bin/vim
@@ -11,3 +13,5 @@
   grep = auto
 [push]
   default = tracking
+[credential]
+	helper = store
