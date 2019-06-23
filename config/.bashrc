@@ -76,21 +76,21 @@ alias lessf='less -N+F'
 
 # gitコマンド
 alias g='git'
-alias gad='g add'
-alias gada='g add -A'
-alias gb='g branch'
-alias gba='g branch -a'           # originも含めた全てのbranchを表示
-alias gbm='g branch --merged'     # merge済みのbranchを表示
-alias gbn='g branch --no-merged'  # mergeしてないbranchを表示
-alias gc='g commit'
-alias gcm='g commit -m'
-alias gco='g checkout'
-alias gft='g fetch'
-alias gpl='g pull'
-alias gps='g push'
-alias gsh='g show'
-alias gst='g status'
-alias gr='g reset'
+alias gad='git add'
+alias gada='git add -A'
+alias gb='git branch'
+alias gba='git branch -a'           # originも含めた全てのbranchを表示
+alias gbm='git branch --merged'     # merge済みのbranchを表示
+alias gbn='git branch --no-merged'  # mergeしてないbranchを表示
+alias gc='git commit'
+alias gcm='git commit -m'
+alias gco='git checkout'
+alias gft='git fetch'
+alias gpl='git pull'
+alias gps='git push'
+alias gsh='git show'
+alias gst='git status'
+alias gr='git reset'
 
 alias gh1='HEAD~'            # HEADから0つ前
 alias gh2='HEAD~~'           # HEADから2つ前
@@ -99,24 +99,24 @@ alias gh4='HEAD~~~~'         # HEADから4つ前
 alias gh5='HEAD~~~~~'        # HEADから5つ前
 alias gh10='HEAD~~~~~~~~~~'
 
-alias gdf='g diff'
-alias gdc='g diff --cached'  # addされているものとのdiff
-alias gds='g diff --staged'  # 同上(1.6.1移行)
-alias gd='g diff HEAD'       # HEADとdiff
-alias gd1='g diff gh1'       # HEADから1つ前とdiff
-alias gd2='g diff gh2'       # HEADから2つ前とdiff
-alias gd3='g diff gh3'       # HEADから3つ前とdiff
-alias gd4='g diff gh4'       # HEADから4つ前とdiff
-alias gd5='g diff gh5'       # HEADから5つ前とdiff
-alias gd10='g diff gh10'     # HEADから10前とdiff
+alias gdf='git diff'
+alias gdc='git diff --cached'  # addされているものとのdiff
+alias gds='git diff --staged'  # 同上(1.6.1移行)
+alias gd='git diff HEAD'       # HEADとdiff
+alias gd1='git diff gh1'       # HEADから1つ前とdiff
+alias gd2='git diff gh2'       # HEADから2つ前とdiff
+alias gd3='git diff gh3'       # HEADから3つ前とdiff
+alias gd4='git diff gh4'       # HEADから4つ前とdiff
+alias gd5='git diff gh5'       # HEADから5つ前とdiff
+alias gd10='git diff gh10'     # HEADから10前とdiff
 
-alias glo="g log"
-alias gl="g log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
-alias gla="g log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
-galias() { alias | grep "'g "  | sed "s/^\([^=]*\)='\(.*\)'/\1    => \2/"| sed "s/'\\\'//g"; }
+alias glo='git log'
+alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
+alias gla="git log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
+galias() { alias | grep "'git "  | sed "s/^\([^=]*\)='\(.*\)'/\1    => \2/"| sed "s/'\\\'//g"; }
 
 # sudo gitコマンド
-alias sg='sudo g'
+alias sg='sudo git'
 alias sgad='sg add'
 alias sgada='sg add -A'
 alias sgb='sg branch'
@@ -147,6 +147,22 @@ alias sgd10='sg diff gh10'     # HEADから10前とdiff
 alias sglo="sg log"
 alias sgl="sg log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
 alias sgla="sg log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
+
+# gitのaliasに補完を行うようにする
+for a in $(alias | sed -n 's/^alias \(g[^=]*\)=.git .*/\1/p'); do
+  c=$(alias $a | sed 's/^[^=]*=.git \([a-z0-9\-]\+\).*/\1/' | tr '-' '_')
+  if set | grep -q "^_git_$c *()"; then
+    eval "__git_complete $a _git_$c"
+  fi
+done
+
+# sudo gitのaliasに補完を行うようにする
+for a in $(alias | sed -n 's/^alias \(sg[^=]*\)=.sg .*/\1/p'); do
+  c=$(alias $a | sed 's/^[^=]*=.sg \([a-z0-9\-]\+\).*/\1/' | tr '-' '_')
+  if set | grep -q "^_git_$c *()"; then
+    eval "__git_complete $a _git_$c"
+  fi
+done
 
 # ------------------------------------
 # Docker aliases
