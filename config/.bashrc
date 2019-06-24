@@ -207,7 +207,7 @@ alias drma='docker container rm $(da --quiet)'
 # Remove all images  old:docker rmi $(docker images --quiet)
 alias dirma='docker image rm $(dia --quiet)'
 # Remove all containers and images by force
-alias dclean='docker container kill $(dia --quiet); drma; dirma;'
+alias dclean='docker container kill $(da --quiet); drma; dirma;'
 
 # is me add docker group  don't need sudo docker command
 alias dockerGroupAdd='docker_group_add'
