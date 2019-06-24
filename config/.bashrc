@@ -190,8 +190,10 @@ alias dilate="dil | head -n 2 | tail -n 1 | awk '{print \$3}'"
 
 # Get an IPaddress of a container
 alias dip="docker container inspect --format '{{ .NetworkSettings.IPAddress }}'"
+# Run a daemonized container
+alias drd="docker container run --detach"
 # Run a daemonized container   --publish-all    Publish all exposed ports to random ports
-alias drd="docker container run --detach --publish-all"
+alias drdpa="docker container run --detach --publish-all"
 # Run an interactive container
 alias drit="docker container run --interactive --tty --publish-all"
 # docker container in bash exec
