@@ -227,28 +227,28 @@ docker_group_add(){
 }
 
 docker_container_remove(){
-  if [ "$1" = "" ]
+  if [ "$1" = "" ]; then
     # 引数なしの場合一番新しいのを削除
     docker container rm $(dlate)
-  then
+  else
     docker container rm $1
   fi
 }
 
 docker_image_remove(){
-  if [ "$1" = "" ]
+  if [ "$1" = "" ]; then
     # 引数なしの場合一番新しいのを削除
     docker image rm $(dilate)
-  then
+  else
     docker image rm $1
   fi
 }
 
 docker_exec() {
-  if [ "$1" = "" ]
+  if [ "$1" = "" ]; then
     # 引数なしの場合一番新しいイメージの中に入る
     docker container exec -it $(dlate) /bin/bash
-  then
+  else
     docker container exec -it $1 /bin/bash
   fi
 }
@@ -270,7 +270,7 @@ export PROMPT_COMMAND_AUTOLS="autols"
 # sudo.vim プラグインのエイリアス
 #---------------------------------------------------------------
 function sudo_vim {
-        \vim sudo:$1
+    \vim sudo:$1
 }
 
 #---------------------------------------------------------------
