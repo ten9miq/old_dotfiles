@@ -211,12 +211,25 @@ alias dirma='docker image rm $(dia --quiet)'
 # Remove all containers and images by force
 alias dclean='docker container kill $(da --quiet); drma; dirma;'
 
+# docker image to dockerfile
+alias dih="docker_image_history"
 # is me add docker group  don't need sudo docker command
 alias dockerGroupAdd='docker_group_add'
 # List all aliases relating to docker
 dalias() { alias | grep 'docker' | sed "s/^\([^=]*\)='\(.*\)'/\1    => \2/"| sed "s/'\\\'//g"; }
 # docker image all update
 alias diupdate="sudo docker images | cut -d ' ' -f1 | tail -n +2 | sort | uniq | egrep -v '^(<none>|ubuntu)$' | xargs -P0 -L1 sudo docker pull"
+
+docker_image_history(){
+  if [ "$1" != "" ]; then
+    docker image history --no-trunc $1  | \
+    tac | tr -s ' ' | cut -d ' ' -f 5- | \
+    sed 's,^/bin/sh -c #(nop) ,,g' | sed 's,^/bin/sh -c,RUN,g' | \
+    sed 's, && ,\n  & ,g' | sed 's,\s*[0-9]*[\.]*[0-9]*[kMG]*B\s*$,,g' | head -n -1
+  else
+    echo "error: no argments."
+  fi
+}
 
 docker_group_add(){
   sudo groupadd docker # dockerグループを作成
