@@ -5333,11 +5333,16 @@ export -f docker_alias_completion_wrapper
 
 
 complete -F _docker docker docker.exe dockerd dockerd.exe
-
+# docker exec
 docker_alias_completion_wrapper __docker_complete_containers_all de
 
+# docker run
 docker_alias_completion_wrapper __docker_complete_containers_all drd
 docker_alias_completion_wrapper __docker_complete_containers_all drit
 
+# docker remove
 docker_alias_completion_wrapper __docker_complete_containers_all drm
-docker_alias_completion_wrapper __docker_complete_containers_all dirm
+docker_alias_completion_wrapper _docker_image_rm dirm
+
+# docker history
+docker_alias_completion_wrapper _docker_image_history dih
