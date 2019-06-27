@@ -194,12 +194,16 @@ alias dilate="dil | head -n 2 | tail -n 1 | awk '{print \$3}'"
 alias dip="docker container inspect --format '{{ .NetworkSettings.IPAddress }}'"
 # Run a daemonized container
 alias drd="docker container run --detach"
+# Runa deamonized container exited to container remove
+alias drdr="docker container run --detach --rm"
+# Run an interactive container exited to container remove
+alias dritr="docker container run --rm --interactive --tty"
 # Run a daemonized container   --publish-all    Publish all exposed ports to random ports
 alias drdpa="docker container run --detach --publish-all"
 # Run an interactive container
-alias drit="docker container run --interactive --tty --publish-all"
+alias drit="docker container run --interactive --tty"
 # docker container in bash exec
-alias de="docker_exec"
+alias ded="docker_exec_bash"
 
 ### docker remove command
 # Remove container id argment or latest container
@@ -259,7 +263,7 @@ docker_image_remove(){
   fi
 }
 
-docker_exec() {
+docker_exec_bash() {
   if [ "$1" = "" ]; then
     # 引数なしの場合一番新しいイメージの中に入る
     docker container exec -it $(dlate) /bin/bash
