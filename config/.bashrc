@@ -91,6 +91,7 @@ alias gps='git push'
 alias gsh='git show'
 alias gst='git status'
 alias gr='git reset'
+alias gcl='git clone'
 
 alias gh1='HEAD~'            # HEADから0つ前
 alias gh2='HEAD~~'           # HEADから2つ前
@@ -132,6 +133,7 @@ alias sgps='sg push'
 alias sgsh='sg show'
 alias sgst='sg status'
 alias sgr='sg reset'
+alias sgcl='sg clone'
 
 alias sgdf='sg diff'
 alias sgdc='sg diff --cached'  # addされているものとのdiff
