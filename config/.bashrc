@@ -104,12 +104,12 @@ alias gdf='git diff'
 alias gdc='git diff --cached'  # addされているものとのdiff
 alias gds='git diff --staged'  # 同上(1.6.1移行)
 alias gd='git diff HEAD'       # HEADとdiff
-alias gd1='git diff gh1'       # HEADから1つ前とdiff
-alias gd2='git diff gh2'       # HEADから2つ前とdiff
-alias gd3='git diff gh3'       # HEADから3つ前とdiff
-alias gd4='git diff gh4'       # HEADから4つ前とdiff
-alias gd5='git diff gh5'       # HEADから5つ前とdiff
-alias gd10='git diff gh10'     # HEADから10前とdiff
+alias gd1='git diff HEAD~'       # HEADから1つ前とdiff
+alias gd2='git diff HEAD~~'       # HEADから2つ前とdiff
+alias gd3='git diff HEAD~~~'       # HEADから3つ前とdiff
+alias gd4='git diff HEAD~~~~'       # HEADから4つ前とdiff
+alias gd5='git diff HEAD~~~~~'       # HEADから5つ前とdiff
+alias gd10='git diff HEAD~~~~~~~~~~'     # HEADから10前とdiff
 
 alias glo='git log'
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
@@ -139,12 +139,12 @@ alias sgdf='sg diff'
 alias sgdc='sg diff --cached'  # addされているものとのdiff
 alias sgds='sg diff --staged'  # 同上(1.6.1移行)
 alias sgd='sg diff HEAD'       # HEADとdiff
-alias sgd1='sg diff gh1'       # HEADから1つ前とdiff
-alias sgd2='sg diff gh2'       # HEADから2つ前とdiff
-alias sgd3='sg diff gh3'       # HEADから3つ前とdiff
-alias sgd4='sg diff gh4'       # HEADから4つ前とdiff
-alias sgd5='sg diff gh5'       # HEADから5つ前とdiff
-alias sgd10='sg diff gh10'     # HEADから10前とdiff
+alias sgd1='sg diff HEAD~'       # HEADから1つ前とdiff
+alias sgd2='sg diff HEAD~~'       # HEADから2つ前とdiff
+alias sgd3='sg diff HEAD~~~'       # HEADから3つ前とdiff
+alias sgd4='sg diff HEAD~~~~'       # HEADから4つ前とdiff
+alias sgd5='sg diff HEAD~~~~~'       # HEADから5つ前とdiff
+alias sgd10='sg diff HEAD~~~~~~~~~~'     # HEADから10前とdiff
 
 alias sglo="sg log"
 alias sgl="sg log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
