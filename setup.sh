@@ -34,6 +34,8 @@ fi
 \cp -r .bash_source_sh/ ~/
 # dein.vimのPluginファイルのコピー
 \cp -r .vim ~/
+# 自身の独自コマンド実行ファイルをコピー
+\cp -r bin ~/
 
 if [ "${OS}" == 'Linux' ] ; then
   echo "OS Linux!!"
