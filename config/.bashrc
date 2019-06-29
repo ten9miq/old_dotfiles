@@ -75,8 +75,7 @@ alias sudovi='sudo_vim'
 alias hg='history | grep'
 alias lessf='less -N+F'
 alias g='git'
-alias sg='sudo git'
-
+alias sg='sudo git -c "include.path='"${XDG_CONFIG_DIR:-$HOME/.config}/git/config\" -c \"include.path=$HOME/.gitconfig\""
 # ------------------------------------
 # Docker aliases
 # ------------------------------------
