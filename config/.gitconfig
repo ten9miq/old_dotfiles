@@ -1,6 +1,5 @@
-[user]
-	email = ruin.of.messger@gmail.com
-	name = 53JIlLenWe11
+[include]
+  path = .gitconfig.local
 
 [core]
   editor = /usr/bin/vim
@@ -11,10 +10,10 @@
   branch = auto
   interactive = auto
   grep = auto
+
 [push]
   default = tracking
-[credential]
-	helper = store
+
 [alias]
   st = status
   ad = add
