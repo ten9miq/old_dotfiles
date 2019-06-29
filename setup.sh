@@ -28,6 +28,7 @@ fi
 \cp config/.vimrc ~/
 \cp config/.gvimrc ~/
 \cp config/.inputrc ~/
+\cp config/.gitconfig ~/
 
 # bashでgitの補完を有効にするためのshell script
 \cp -r .bash_source_sh/ ~/
@@ -36,7 +37,6 @@ fi
 
 if [ "${OS}" == 'Linux' ] ; then
   echo "OS Linux!!"
-  \cp config/.gitconfig ~/
   \cp config/.tmux.conf ~/.tmux.conf
   # \cp config/.gitignore ~/
   # \cp config/ssh_config ~/.ssh/config

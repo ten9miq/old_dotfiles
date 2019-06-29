@@ -1,5 +1,14 @@
 [include]
   path = .gitconfig.local
+# 環境に合わせて下記を埋めて上記ファイルに記載
+# [user]
+#   name = 
+#   email = 
+
+# [credential]
+#   helper = wincred
+#    win  or  linux
+#   helper = store
 
 [core]
   editor = /usr/bin/vim
