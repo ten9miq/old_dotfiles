@@ -8,4 +8,4 @@ $if Bash
 set completion-ignore-case on
 $endif
 "\C-j": shell-forward-word
-"\C-n": shell-backward-word
+"\C-g": shell-backward-word
