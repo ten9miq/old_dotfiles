@@ -237,6 +237,8 @@ inoremap <C-c> <ESC>
 "inoremap <A-j> <C-o>j
 "inoremap <A-k> <C-o>k
 "inoremap <A-l> <C-o>l
+" Ctrl+lは特にキーバインドがないのでカーソルを右に動かす
+inoremap <C-l> <C-o>l
 
 " 日本語入力がオンのままでも使えるコマンド(Enterキーは必要)
 nnoremap あ a
