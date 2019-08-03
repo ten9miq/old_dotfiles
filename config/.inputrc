@@ -7,5 +7,5 @@ set prefer-visible-bell
 $if Bash
 set completion-ignore-case on
 $endif
-"\C-j": shell-forward-word
-"\C-g": shell-backward-word
+"\C-j": shell-backward-word
+"\C-g": shell-forward-word
