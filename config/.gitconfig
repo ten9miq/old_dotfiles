@@ -35,7 +35,6 @@
   cm = commit -m
   co = checkout
   sh = show
-  st = status
   r = reset
 
   cl = clone
