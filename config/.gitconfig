@@ -12,6 +12,10 @@
 
 [core]
   editor = vim
+  # ファイル名の大文字・小文字の変更を検知するようにする
+  ignorecase = false
+  # git statusで変更ファイル一覧を表示するときに、日本語のファイル名が文字化けしないでちゃんと表示される。
+  quotepath = false
 
 [color]
   status = auto
@@ -24,7 +28,6 @@
   default = tracking
 
 [alias]
-  st = status
   ad = add
   ada = add -A
   b = branch
@@ -33,11 +36,13 @@
   bn = branch --no-merged  # mergeしてないbranchを表示
   c = commit
   cm = commit -m
+  r = reset
+  rh = reset --hard
+
   co = checkout
   sh = show
+  ss = stash
   st = status
-  r = reset
-
   cl = clone
   ft = fetch
   pl = pull
