@@ -115,3 +115,6 @@ repo = 'sickill/vim-monokai'
 [[plugins]]
 repo = 'chr4/nginx.vim'
 
+# dockerfileのハイライト設定
+[[plugins]]
+repo = 'ekalinin/Dockerfile.vim'
