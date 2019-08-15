@@ -16,6 +16,7 @@
   ignorecase = false
   # git statusで変更ファイル一覧を表示するときに、日本語のファイル名が文字化けしないでちゃんと表示される。
   quotepath = false
+  autocrlf = input
 
 [color]
   status = auto
