@@ -24,6 +24,7 @@ fi
 
 \cp config/.bash_profile ~/
 \cp config/.bashrc ~/
+\cp config/.zshrc ~/
 \cp config/.colorrc ~/
 \cp config/.vimrc ~/
 \cp config/.gvimrc ~/
@@ -32,6 +33,8 @@ fi
 
 # bashでgitの補完を有効にするためのshell script
 \cp -r .bash_source_sh/ ~/
+# aliasなどzshとbashで共通できるもの
+\cp -r config/.read_conf/ ~/
 # dein.vimのPluginファイルのコピー
 \cp -r .vim ~/
 # 自身の独自コマンド実行ファイルをコピー

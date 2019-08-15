@@ -52,135 +52,19 @@ RESET='\[\e[0m\]'
 # http://xta.github.io/HalloweenBash/
 # 16color
 # export PS1="$DARK_GLAY[\D{%Y/%m/%d} \t] $LIGHT_PURPLE\u$LIGHT_BLUE@$GREEN\H\n$RESET $CYAN\w $LIGHT_GLAY\$(parse_git_branch) $LIGHT_BLUE\$ $RESET"
-export PS1="$DARK_GLAY[\D{%Y/%m/%d} \t] $LIGHT_PURPLE\u$LIGHT_BLUE@$GREEN\H\n$RESET $CYAN\w $LIGHT_GLAY\$(__git_ps1 '(%s)') $LIGHT_BLUE\$ $RESET"
+# export PS1="$DARK_GLAY[\D{%y/%m/%d} \t] $LIGHT_PURPLE\u$LIGHT_BLUE@$GREEN\H\n$RESET $CYAN\w $LIGHT_GLAY\$(__git_ps1 '(%s)') $LIGHT_BLUE\$ $RESET"
+export PS1="$DARK_GLAY[\D{%y/%m/%d} \t]$RESET $CYAN\w$LIGHT_GLAY\$(__git_ps1 '(%s)')\n$LIGHT_PURPLE\u$LIGHT_BLUE@$GREEN\H $LIGHT_BLUE\$ $RESET"
 
 function parse_git_branch {
-        git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
 
 # cd省略してのディレクトリ移動を行う
 shopt -s autocd
 
-# bashコマンド
-alias v='vim'
-alias vi='vim'
-alias ls='ls -AXFh --group-directories-first --color=auto'
-alias ll='ls -AlXFh --group-directories-first --color=auto'
-alias cp='cp -i'        # -i    コピー時に上書きされるファイルがある場合、確認が入る。
-alias mv='mv -i'        # -i    移動時に上書きされるものがある場合、確認が入る。
-alias rm='rm -i'        # -i    ファイルの削除前に確認が入る。
-alias sudo='sudo '
-alias sv='sudo_vim'
-alias svi='sudo_vim'
-alias hg='history | grep'
-alias lessf='less -N+F'
-alias g='git'
-alias sg='sudo git -c "include.path='"${XDG_CONFIG_DIR:-$HOME/.config}/git/config\" -c \"include.path=$HOME/.gitconfig\""
-# ------------------------------------
-# Docker aliases
-# ------------------------------------
-alias d="docker"
-alias dc="docker-compose"
-alias sd="sudo docker"
-alias sdc="sudo docker-compose"
+# aliasの読み込み
+[ -f ~/.read_conf/.alias ] && source ~/.read_conf/.alias
 
-### docker container
-# List containers  old:docker ps
-alias dl="docker container ls"
-# List containers including stopped containers
-alias da="docker container ls --all"
-# Get the latest container ID  old:docker ps --latest --quiet
-alias dlate="dl --latest --quiet"
-
-### docker image
-# List images  old:docker ps
-alias dil="docker image ls"
-# List images including intermediates
-alias dia="docker image ls --all"
-# Get the latest image ID
-alias dilate="dil | head -n 2 | tail -n 1 | awk '{print \$3}'"
-
-# Get an IPaddress of a container
-alias dip="docker container inspect --format '{{ .NetworkSettings.IPAddress }}'"
-# Run a daemonized container
-alias drd="docker container run --detach"
-# Runa deamonized container exited to container remove
-alias drdr="docker container run --detach --rm"
-# Run an interactive container exited to container remove
-alias dritr="docker container run --rm --interactive --tty"
-# Run a daemonized container   --publish-all    Publish all exposed ports to random ports
-alias drdpa="docker container run --detach --publish-all"
-# Run an interactive container
-alias drit="docker container run --interactive --tty"
-# docker container in bash exec
-alias ded="docker_exec_bash"
-
-### docker remove command
-# Remove container id argment or latest container
-alias drm='docker_container_remove'
-# Remove image id argment or latest image
-alias dirm='docker_image_remove'
-# Remove all containers  old:docker rm $(docker ps --all --quiet)
-alias drma='docker container rm $(da --quiet)'
-# Remove all images  old:docker rmi $(docker images --quiet)
-alias dirma='docker image rm $(dia --quiet)'
-# Remove all containers and images by force
-alias dclean='docker container kill $(da --quiet); drma; dirma;'
-
-# docker image to dockerfile
-alias dih="docker_image_history"
-# is me add docker group  don't need sudo docker command
-alias dockerGroupAdd='docker_group_add'
-# List all aliases relating to docker
-dalias() { alias | grep 'docker' | sed "s/^\([^=]*\)='\(.*\)'/\1    => \2/"| sed "s/'\\\'//g"; }
-# docker image all update
-alias diupdate="sudo docker images | cut -d ' ' -f1 | tail -n +2 | sort | uniq | egrep -v '^(<none>|ubuntu)$' | xargs -P0 -L1 sudo docker pull"
-
-docker_image_history(){
-  if [ "$1" != "" ]; then
-    docker image history --no-trunc $1  | \
-    tac | tr -s ' ' | cut -d ' ' -f 5- | \
-    sed 's,^/bin/sh -c #(nop) ,,g' | sed 's,^/bin/sh -c,RUN,g' | \
-    sed 's, && ,\n  & ,g' | sed 's,\s*[0-9]*[\.]*[0-9]*[kMG]*B\s*$,,g' | head -n -1
-  else
-    echo "error: no argments."
-  fi
-}
-
-docker_group_add(){
-  sudo groupadd docker # dockerグループを作成
-  sudo gpasswd -a $USER docker # 自身をdocker gruopに追加 sudo 不要になる
-  sudo systemctl restart docker # dockerの再起動
-  echo "グループ適用のためログアウトします｡"
-  exit
-}
-
-docker_container_remove(){
-  if [ "$1" = "" ]; then
-    # 引数なしの場合一番新しいのを削除
-    docker container rm $(dlate)
-  else
-    docker container rm $1
-  fi
-}
-
-docker_image_remove(){
-  if [ "$1" = "" ]; then
-    # 引数なしの場合一番新しいのを削除
-    docker image rm $(dilate)
-  else
-    docker image rm $1
-  fi
-}
-
-docker_exec_bash() {
-  if [ "$1" = "" ]; then
-    # 引数なしの場合一番新しいイメージの中に入る
-    docker container exec -it $(dlate) /bin/bash
-  else
-    docker container exec -it $1 /bin/bash
-  fi
-}
 
 #---------------------------------------------------------------
 # cd autocd pushd popd でディレクトリ移動したら自動でlsコマンドを実行
@@ -194,13 +78,6 @@ autols(){
 
 # PROMPT_COMMAND="dispatch"で実行適用される(複数適用のためにこのPROMPT_COMMAND_****の環境変数を使う)
 export PROMPT_COMMAND_AUTOLS="autols"
-
-#---------------------------------------------------------------
-# sudo.vim プラグインのエイリアス
-#---------------------------------------------------------------
-function sudo_vim {
-    \vim sudo:$1
-}
 
 #---------------------------------------------------------------
 # [History]
