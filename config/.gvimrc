@@ -20,7 +20,8 @@ colorscheme molokai
 set background=dark
 " フォントを設定
 " set guifont=Myrica_M:h10:cSHIFTJIS
-set guifont=Ricty_Diminished:h10:cSHIFTJIS
+" set guifont=Ricty_Diminished:h10:cSHIFTJIS
+set guifont=HackGen:h10:cSHIFTJIS:qDRAFT
 set linespace=-1
 " set guifontwide=Ricty_Diminished_Discord:h11
 set renderoptions=type:directx
