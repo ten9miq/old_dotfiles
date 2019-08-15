@@ -79,13 +79,6 @@ autols(){
 export PROMPT_COMMAND_AUTOLS="autols"
 
 #---------------------------------------------------------------
-# sudo.vim プラグインのエイリアス
-#---------------------------------------------------------------
-function sudo_vim {
-    \vim sudo:$1
-}
-
-#---------------------------------------------------------------
 # [History]
 # Share bash_history bitween TTY
 # http://iandeth.dyndns.org/mt/ian/archives/000651.html

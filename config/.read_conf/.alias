@@ -13,6 +13,14 @@ alias hg='history | grep'
 alias lessf='less -N+F'
 alias g='git'
 alias sg='sudo git -c "include.path='"${XDG_CONFIG_DIR:-$HOME/.config}/git/config\" -c \"include.path=$HOME/.gitconfig\""
+
+#---------------------------------------------------------------
+# sudo.vim プラグインのエイリアス
+#---------------------------------------------------------------
+sudo_vim(){
+  \vim sudo:$1
+}
+
 # ------------------------------------
 # Docker aliases
 # ------------------------------------
