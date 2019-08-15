@@ -87,3 +87,15 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*:manuals' separate-sections true
 # --prefix=/usr などの = 以降でも補完
 setopt magic_equal_subst
+
+# -----------------------------
+# alias
+# -----------------------------
+# aliasの読み込み
+[ -f ~/.read_conf/.alias ] && source ~/.read_conf/.alias
+
+# zshのglobal alias
+alias -g L='| less'
+alias -g H='| head'
+alias -g G='| grep'
+alias -g GI='| grep -ri'
