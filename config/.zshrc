@@ -15,7 +15,7 @@ export EDITOR=vim
 #setopt IGNOREEOF
 # パスを追加したい場合
 export PATH="$HOME/bin:$PATH"
-# cdした際のディレクトリをディレクトリスタックへ自動追加
+# cdで移動してもpushdと同じようにディレクトリスタックに追加する。
 setopt auto_pushd
 # ディレクトリスタックへの追加の際に重複させない
 setopt pushd_ignore_dups
@@ -40,11 +40,6 @@ setopt correct
 setopt correct_all
 # 上書きリダイレクトの禁止
 setopt no_clobber
-# sudo の後ろでコマンド名を補完する
-zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
-                   /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin
-# ps コマンドのプロセス名補完
-zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 # パスの最後のスラッシュを削除しない
 setopt noautoremoveslash
 # 各コマンドが実行されるときにパスをハッシュに入れる
@@ -117,6 +112,11 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*:manuals' separate-sections true
 # --prefix=/usr などの = 以降でも補完
 setopt magic_equal_subst
+# sudo の後ろでコマンド名を補完する
+zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
+                   /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin
+# ps コマンドのプロセス名補完
+zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 
 # -----------------------------
 # alias
