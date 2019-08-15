@@ -66,7 +66,7 @@ autoload -Uz compinit ; compinit
 setopt complete_in_word
 # コマンドミスを修正
 setopt correct
-# 補完の選択を楽にする
+# 補完キー連打で順に補完候補を自動で補完
 zstyle ':completion:*' menu select
 # 補完候補をできるだけ詰めて表示する
 setopt list_packed
