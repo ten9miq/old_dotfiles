@@ -52,7 +52,8 @@ RESET='\[\e[0m\]'
 # http://xta.github.io/HalloweenBash/
 # 16color
 # export PS1="$DARK_GLAY[\D{%Y/%m/%d} \t] $LIGHT_PURPLE\u$LIGHT_BLUE@$GREEN\H\n$RESET $CYAN\w $LIGHT_GLAY\$(parse_git_branch) $LIGHT_BLUE\$ $RESET"
-export PS1="$DARK_GLAY[\D{%Y/%m/%d} \t] $LIGHT_PURPLE\u$LIGHT_BLUE@$GREEN\H\n$RESET $CYAN\w $LIGHT_GLAY\$(__git_ps1 '(%s)') $LIGHT_BLUE\$ $RESET"
+# export PS1="$DARK_GLAY[\D{%y/%m/%d} \t] $LIGHT_PURPLE\u$LIGHT_BLUE@$GREEN\H\n$RESET $CYAN\w $LIGHT_GLAY\$(__git_ps1 '(%s)') $LIGHT_BLUE\$ $RESET"
+export PS1="$DARK_GLAY[\D{%y/%m/%d} \t]$RESET $CYAN\w$LIGHT_GLAY\$(__git_ps1 '(%s)')\n$LIGHT_PURPLE\u$LIGHT_BLUE@$GREEN\H $LIGHT_BLUE\$ $RESET"
 
 function parse_git_branch {
         git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
