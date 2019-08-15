@@ -63,7 +63,8 @@ function parse_git_branch {
 shopt -s autocd
 
 # aliasの読み込み
-source "$HOME/.read_conf/.alias"
+[ -f ~/.read_conf/.alias ] && source ~/.read_conf/.alias
+
 
 #---------------------------------------------------------------
 # cd autocd pushd popd でディレクトリ移動したら自動でlsコマンドを実行
