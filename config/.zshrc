@@ -44,7 +44,13 @@ setopt no_clobber
 setopt noautoremoveslash
 # 各コマンドが実行されるときにパスをハッシュに入れる
 #setopt hash_cmds
+#
+## 実行したプロセスの消費時間が3秒以上かかったら
+## 自動的に消費時間の統計情報を表示する。
+REPORTTIME=5
 
+## 「/」も単語区切りとみなす。
+WORDCHARS=${WORDCHARS:s,/,,}
 # -----------------------------
 # Prompt
 # -----------------------------
@@ -63,6 +69,18 @@ setopt noautoremoveslash
 # %*    時間(hh:flag_mm:ss)
 # %T    時間(hh:mm)
 # %t    時間(hh:mm(am/pm))
+
+#色の定義
+#黒赤緑黄青紫水白
+local BLACK=$'%{\e[1;30m%}'
+local RED=$'%{\e[1;31m%}'
+local GREEN=$'%{\e[1;32m%}'
+local YELLOW=$'%{\e[1;33m%}'
+local BLUE=$'%{\e[1;34m%}'
+local PURPLE=$'%{\e[1;35m%}'
+local LIGHTBLUE=$'%{\e[1;36m%}'
+local WHITE=$'%{\e[1;37m%}'
+local DEFAULT=$'%{\e[1;m%}'
 
 # zshのの利用可能な色の一覧表示
 zsh_color(){
@@ -92,11 +110,15 @@ setopt complete_in_word
 # コマンドミスを修正
 setopt correct
 # 補完キー連打で順に補完候補を自動で補完
-zstyle ':completion:*' menu select
+# select=2: 補完候補を一覧から選択する。
+#           ただし、補完候補が2つ以上なければすぐに補完する。
+zstyle ':completion:*' menu select=2
+# 補完候補が複数ある時、一覧表示 (auto_list) せず、すぐに最初の候補を補完する
+setopt menu_complete
 # 補完候補をできるだけ詰めて表示する
 setopt list_packed
-# 補完候補にファイルの種類も表示する
-#setopt list_types
+# 補完候補にファイルの種類も表示する(ls -Fの記号)
+setopt list_types
 # 色の設定
 export LSCOLORS=Exfxcxdxbxegedabagacad
 # 補完時の色設定
@@ -106,17 +128,42 @@ zstyle ':completion::complete:*' use-cache true
 # 補完候補に色つける
 autoload -U colors ; colors ; zstyle ':completion:*' list-colors "${LS_COLORS}"
 #zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+#kill の候補にも色付き表示
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([%0-9]#)*=0=01;31'
 # 大文字・小文字を区別しない(大文字を入力した場合は区別する)
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 # manの補完をセクション番号別に表示させる
 zstyle ':completion:*:manuals' separate-sections true
+# 補完候補の候補のセパレートを変更
+zstyle ':completion:*' list-separator '-->'
 # --prefix=/usr などの = 以降でも補完
 setopt magic_equal_subst
+## カッコの対応などを自動的に補完
+setopt auto_param_keys
+## 補完時にヒストリを自動的に展開する。
+setopt hist_expand
+# 詳細な情報を使う。
+zstyle ':completion:*' verbose yes
+## 辞書順ではなく数字順に並べる。
+setopt numeric_glob_sort
+
+zstyle ':completion:*:descriptions' format $GREEN'completing %B%d%b'$DEFAULT
+zstyle ':completion:*:messages' format $LIGHTBLUE'%d'$DEFAULT
+zstyle ':completion:*:corrections' format $YELLOW'%B%d '$RED'(errors: %e)%b'$DEFAULT
+zstyle ':completion:*:warnings' format $RED'No matches for:'$YELLOW' %d'$DEFAULT
+
 # sudo の後ろでコマンド名を補完する
 zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
                    /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin
 # ps コマンドのプロセス名補完
 zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
+
+## 補完方法毎にグループ化する。
+### 補完方法の表示方法
+###   %B...%b: 「...」を太字にする。
+###   %d: 補完方法のラベル
+zstyle ':completion:*' format '%B%d%b'
+zstyle ':completion:*' group-name ''
 
 # -----------------------------
 # alias
