@@ -114,7 +114,7 @@ setopt correct
 #           ただし、補完候補が2つ以上なければすぐに補完する。
 zstyle ':completion:*' menu select=2
 # 補完候補が複数ある時、一覧表示 (auto_list) せず、すぐに最初の候補を補完する
-setopt menu_complete
+#setopt menu_complete # 強制で最初のが選択されるのが使いづらいので無効化
 # 補完候補をできるだけ詰めて表示する
 setopt list_packed
 # 補完候補にファイルの種類も表示する(ls -Fの記号)
