@@ -1,14 +1,3 @@
-# User specific environment and startup programs
-PATH=$PATH:$HOME/bin
-
-export PATH
-unset USERNAME
-
-# bashにてベルを鳴らさないようする
-# (コマンドラインのインターフェイスをbashとは別にコントロールをする
-#「readline」が組み込まれている場合は.inputrcに設定が必要)
-set bell-style audible
-
 # tmuxの実行時にdotfileの更新チェックが実行されないようにする処理
 if [ -n "$TMUX" ]; then
   #何もしない
@@ -44,10 +33,3 @@ else
     \cd -
   fi
 fi
-
-# Get the aliases and functions
-if [ -f ~/.bashrc ] ; then
-  # bashファイルの即時反映
-  source ~/.bashrc
-fi
-
