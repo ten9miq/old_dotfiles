@@ -37,6 +37,8 @@ fi
 \cp -r config/.read_conf/ ~/
 # dein.vimのPluginファイルのコピー
 \cp -r .vim ~/
+# zshのファイルをコピー
+\cp -r .zsh ~/
 # 自身の独自コマンド実行ファイルをコピー
 \cp -r bin ~/
 

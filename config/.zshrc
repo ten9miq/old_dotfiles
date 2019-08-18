@@ -290,6 +290,10 @@ setopt transient_rprompt
 # -----------------------------
 # Completion
 # -----------------------------
+# 補完ファイルの読み込み
+if [ -e ~/.zsh/completions ]; then
+  fpath=(~/.zsh/completions $fpath)
+fi
 # 単語の入力途中でもTab補完を有効化
 setopt complete_in_word
 # コマンドミスを修正
