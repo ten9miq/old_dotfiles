@@ -146,8 +146,7 @@ setopt transient_rprompt
 
 
 #PROMPT='%F{cyan}%n@%m%f:%~# '
-PROMPT="
-%F{245}[%{%D %*]%f${fg[cyan]}%} %~%{${reset_color}%}
+PROMPT="%F{245}[%{%D %*]%f${fg[cyan]}%} %~%{${reset_color}%}
 %F{200}%n%f%F{021}@%f%F{green}%m%f $ "
 
 if is-at-least 4.3.11; then
@@ -296,7 +295,6 @@ if is-at-least 4.3.11; then
             hook_com[misc]+=":S${stash}"
         fi
     }
-
 fi
 
 function _update_vcs_info_msg() {
