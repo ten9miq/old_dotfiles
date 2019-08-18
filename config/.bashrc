@@ -98,21 +98,6 @@ export HISTSIZE=9999  # 履歴のMAX保存数を指定
 HISTTIMEFORMAT='%y/%m/%d %H:%M:%S  '
 
 #---------------------------------------------------------------
-# 特定のある列だけを取り出す col 2 これで2列目を取り出す 例)git statu -s | col 2
-#---------------------------------------------------------------
-function col {
-  awk -v col=$1 '{print $col}'
-}
-
-#---------------------------------------------------------------
-# 取り出した結果の最初はタイトル行だから不要飛ばす 例)docker rmi $(docker images | col 3 | xargs | skip 1)
-#---------------------------------------------------------------
-function skip {
-    n=$(($1 + 1))
-    cut -d' ' -f$n-
-}
-
-#---------------------------------------------------------------
 # PROMPT_COMMANDを複数適用し、.bashrcの再読読み込みなどした後にコマンドが重複しないために
 # ディスパッチと複数コマンドの再適用処理
 # https://qiita.com/tay07212/items/9509aef6dc3bffa7dd0c
@@ -128,24 +113,4 @@ dispatch () {
 }
 # 新しいプロンプトが表示される前に実行されるコマンド
 export PROMPT_COMMAND="dispatch"
-
-#---------------------------------------------------------------
-# SSHログイン時にtmuxを自動で開くようにする
-#---------------------------------------------------------------
-SESSION_NAME=ope
-
-if [[ -z "$TMUX" && -z "$STY" ]] && type tmux >/dev/null 2>&1; then
-  option=""
-  if tmux has-session -t ${SESSION_NAME}; then
-    option="attach -t ${SESSION_NAME}"
-  else
-    option="new -s ${SESSION_NAME}"
-  fi
-  tmux $option && exit
-fi
-#■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-# tmuxのhostごとにstatus lineの色を変える
-if ! [ "$TMUX" = "" ]; then
-    tmux set-option status-bg $(perl -MList::Util=sum -e'print+(red,green,blue,yellow,cyan,magenta,white)[sum(unpack"C*",shift)%7]' $(hostname)) | cat > /dev/null
-fi
 
