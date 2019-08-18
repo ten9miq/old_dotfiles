@@ -30,18 +30,16 @@ setopt notify
 setopt print_eight_bit
 # 終了ステータスが0以外の場合にステータスを表示する
 setopt print_exit_value
-# ファイル名の展開でディレクトリにマッチした場合 末尾に / を付加
-setopt mark_dirs
-# コマンドのスペルチェックをする
-setopt correct
-# コマンドライン全てのスペルチェックをする
-setopt correct_all
 # 上書きリダイレクトの禁止
 setopt no_clobber
 # パスの最後のスラッシュを削除しない
 setopt noautoremoveslash
 # 各コマンドが実行されるときにパスをハッシュに入れる
 #setopt hash_cmds
+# 範囲指定できるようにする
+# 例 : mkdir {1-3} で フォルダ1, 2, 3を作れる
+setopt brace_ccl
+
 #
 ## 実行したプロセスの消費時間が3秒以上かかったら
 ## 自動的に消費時間の統計情報を表示する。
@@ -147,6 +145,12 @@ setopt mark_dirs
 setopt interactive_comments
 # 明確なドットの指定なしで.から始まるファイルをマッチ
 setopt globdots
+# ファイル名の展開でディレクトリにマッチした場合 末尾に / を付加
+setopt mark_dirs
+# コマンドのスペルチェックをする
+setopt correct
+# コマンドライン全てのスペルチェックをする
+setopt correct_all
 
 
 # 色の設定
