@@ -14,6 +14,8 @@ autoload -Uz vcs_info
 autoload -Uz add-zsh-hook
 # 自動補完を有効にする
 autoload -Uz compinit ; compinit
+# cdrコマンドを有効 ログアウトしても有効なディレクトリ履歴
+autoload -Uz chpwd_recent_dirs cdr
 
 # Ctrl+Dでログアウトしてしまうことを防ぐ
 #setopt IGNOREEOF
@@ -67,6 +69,11 @@ setopt pushd_ignore_dups
 setopt auto_cd
 # 移動後にls
 function chpwd() { ls -AXFh --group-directories-first --color=auto }
+
+# cdr タブでリストを表示
+add-zsh-hook chpwd chpwd_recent_dirs
+# cdrコマンドで履歴にないディレクトリにも移動可能に
+zstyle ":chpwd:*" recent-dirs-default true
 
 # cdを移動を便利にするenhancdを追加
 if [ -f ~/.read_conf/enhancd/init.sh ]; then
