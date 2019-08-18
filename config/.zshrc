@@ -65,6 +65,8 @@ setopt auto_pushd
 setopt pushd_ignore_dups
 # ディレクトリ名の入力のみで移動する
 setopt auto_cd
+# 移動後にls
+function chpwd() { ls -AXFh --group-directories-first --color=auto }
 
 # cdを移動を便利にするenhancdを追加
 if [ -f ~/.read_conf/enhancd/init.sh ]; then
