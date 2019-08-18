@@ -112,10 +112,26 @@ local LIGHTBLUE=$'%{\e[1;36m%}'
 local WHITE=$'%{\e[1;37m%}'
 local DEFAULT=$'%{\e[1;m%}'
 
+
+# 色の設定
+export LSCOLORS=Exfxcxdxbxegedabagacad
+# 補完時の色設定
+export LS_COLORS='di=01;96:ln=01;35:so=01;32:ex=01;31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
+# 補完候補に色つける
+autoload -U colors ; colors ; zstyle ':completion:*' list-colors "${LS_COLORS}"
+
+
 # zshのの利用可能な色の一覧表示
 zsh_color(){
   for c in {000..255}; do echo -n "\e[38;5;${c}m $c" ; [ $(($c%16)) -eq 15  ] && echo;done;echo"]"
 }
+
+
+# Prompt内で変数展開・コマンド置換・算術演算を実行する
+setopt prompt_subst
+# コピペしやすいようにコマンド実行後は右プロンプトを消す。
+setopt transient_rprompt
+
 
 #PROMPT='%F{cyan}%n@%m%f:%~# '
 PROMPT="
@@ -296,11 +312,6 @@ function _update_vcs_info_msg() {
 }
 add-zsh-hook precmd _update_vcs_info_msg
 
-# Prompt内で変数展開・コマンド置換・算術演算を実行する
-setopt prompt_subst
-# コピペしやすいようにコマンド実行後は右プロンプトを消す。
-setopt transient_rprompt
-
 # -----------------------------
 # Completion
 # -----------------------------
@@ -344,14 +355,6 @@ setopt mark_dirs
 setopt correct
 # コマンドライン全てのスペルチェックをする
 setopt correct_all
-
-
-# 色の設定
-export LSCOLORS=Exfxcxdxbxegedabagacad
-# 補完時の色設定
-export LS_COLORS='di=01;34:ln=01;35:so=01;32:ex=01;31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
-# 補完候補に色つける
-autoload -U colors ; colors ; zstyle ':completion:*' list-colors "${LS_COLORS}"
 
 
 # 補完キー連打で順に補完候補を自動で補完
