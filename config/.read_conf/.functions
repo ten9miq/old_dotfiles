@@ -48,19 +48,27 @@ function skip {
 #---------------------------------------------------------------
 # SSHログイン時にtmuxを自動で開くようにする
 #---------------------------------------------------------------
-SESSION_NAME=ope
-
-if [[ -z "$TMUX" && -z "$STY" ]] && type tmux >/dev/null 2>&1; then
-  option=""
-  if tmux has-session -t ${SESSION_NAME}; then
-    option="attach -t ${SESSION_NAME}"
-  else
-    option="new -s ${SESSION_NAME}"
+if [[ ! -n $TMUX && $- == *l* ]]; then
+  # get the IDs
+  ID="`tmux list-sessions >/dev/null 2>&1;`"
+  if [[ -z "$ID" ]]; then
+    tmux new-session
   fi
-  tmux $option && exit
+  create_new_session="Create New Session"
+  ID="$ID\n${create_new_session}:"
+  ID="`echo $ID | $PERCOL | cut -d: -f1`"
+  if [[ "$ID" = "${create_new_session}" ]]; then
+    tmux new-session
+  elif [[ -n "$ID" ]]; then
+    tmux attach-session -t "$ID"
+  else
+    :  # Start terminal normally
+  fi
 fi
-#■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
+#---------------------------------------------------------------
 # tmuxのhostごとにstatus lineの色を変える
+#---------------------------------------------------------------
 if ! [ "$TMUX" = "" ]; then
     tmux set-option status-bg $(perl -MList::Util=sum -e'print+(red,green,blue,yellow,cyan,magenta,white)[sum(unpack"C*",shift)%7]' $(hostname)) | cat > /dev/null
 fi
