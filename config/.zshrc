@@ -443,3 +443,10 @@ globalias() {
 }
 zle -N globalias
 bindkey " " globalias
+
+# -----------------------------
+# functions
+# -----------------------------
+# 関数の読み込み
+[ -f ~/.read_conf/.functions ] && source ~/.read_conf/.functions
+
