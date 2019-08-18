@@ -362,6 +362,8 @@ zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 ###   %d: 補完方法のラベル
 zstyle ':completion:*' format '%B%d%b'
 zstyle ':completion:*' group-name ''
+# cd ../の時に今いるディレクトリを補完候補から外す
+zstyle ':completion:*' ignore-parents parent pwd ..
 
 # -----------------------------
 # History
