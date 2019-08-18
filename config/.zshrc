@@ -54,6 +54,13 @@ REPORTTIME=3
 ## 「/」も単語区切りとみなす。
 WORDCHARS=${WORDCHARS:s,/,,}
 
+# プロンプト上でのコマンドなどのシンタックスハイライトを有効にする
+[ -f ~/.read_conf/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] \
+  && source ~/.read_conf/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# コマンド入力中にサジェストを表示する
+[ -f ~/.read_conf/zsh-autosuggestions/zsh-autosuggestions.zsh ] \
+  && source ~/.read_conf/zsh-autosuggestions/zsh-autosuggestions.zsh
 # -----------------------------
 # KeyBind
 # -----------------------------
@@ -301,6 +308,10 @@ setopt transient_rprompt
 if [ -e ~/.zsh/completions ]; then
   fpath=(~/.zsh/completions $fpath)
 fi
+if [ -e ~/.read_conf/zsh-completions/src ]; then
+  fpath=(~/.read_conf/zsh-completions/src $fpath)
+fi
+
 # 単語の入力途中でもTab補完を有効化
 setopt complete_in_word
 # コマンドミスを修正
