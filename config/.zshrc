@@ -67,6 +67,13 @@ bindkey -e  # emacsモードで使う
 bindkey '\C-j' backward-word
 bindkey '\C-g' forward-word
 
+# ^R で履歴検索をするときに * でワイルドカードを使用出来るようにする
+#bindkey '^R' history-incremental-pattern-search-backward
+#bindkey "^S" history-incremental-search-forward
+# ^P,^Nを検索へ割り当て
+# bindkey "^P" history-search-backward
+# bindkey "^N" history-search-forward
+
 # -----------------------------
 # Prompt
 # -----------------------------
@@ -398,12 +405,6 @@ setopt hist_verify
 setopt hist_reduce_blanks
 # historyコマンドは残さない
 setopt hist_save_no_dups
-# ^R で履歴検索をするときに * でワイルドカードを使用出来るようにする
-#bindkey '^R' history-incremental-pattern-search-backward
-#bindkey "^S" history-incremental-search-forward
-# ^P,^Nを検索へ割り当て
-# bindkey "^P" history-search-backward
-# bindkey "^N" history-search-forward
 
 # -----------------------------
 # alias
