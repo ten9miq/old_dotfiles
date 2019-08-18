@@ -12,7 +12,7 @@ onerror()
   status=$?
   case $status in
     # 正常終了であるためここで終わる
-    [0]*) exit 1;;
+    [0]*) exit 0;;
   esac
 
     script=$0
