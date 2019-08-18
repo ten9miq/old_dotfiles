@@ -393,8 +393,8 @@ setopt hist_save_no_dups
 #bindkey '^R' history-incremental-pattern-search-backward
 #bindkey "^S" history-incremental-search-forward
 # ^P,^Nを検索へ割り当て
-bindkey "^P" history-search-backward
-bindkey "^N" history-search-forward
+# bindkey "^P" history-search-backward
+# bindkey "^N" history-search-forward
 
 # -----------------------------
 # alias
