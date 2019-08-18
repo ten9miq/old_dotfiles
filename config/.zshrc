@@ -9,8 +9,6 @@
 # -----------------------------
 # 色を使用
 autoload -Uz colors ; colors
-# エディタをvimに設定
-export EDITOR=vim
 # Ctrl+Dでログアウトしてしまうことを防ぐ
 #setopt IGNOREEOF
 # パスを追加したい場合
@@ -51,6 +49,20 @@ REPORTTIME=5
 
 ## 「/」も単語区切りとみなす。
 WORDCHARS=${WORDCHARS:s,/,,}
+
+# -----------------------------
+# KeyBind
+# -----------------------------
+# エディタをvimに設定
+export EDITOR=vim
+bindkey -d  # いったんキーバインドをリセット
+bindkey -e  # emacsモードで使う
+# bindkey -a  # vicmdモード
+# bindkey -v # viinsモード
+
+bindkey '\C-j' backward-word
+bindkey '\C-g' forward-word
+
 # -----------------------------
 # Prompt
 # -----------------------------
