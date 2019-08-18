@@ -22,7 +22,8 @@ else
   exit 1
 fi
 
-\cp config/.bash_profile ~/
+\cp config/.bash_profile_.zprofile ~/.bash_profile
+\cp config/.bash_profile_.zprofile ~/.zprofile
 \cp config/.bashrc ~/
 \cp config/.zshrc ~/
 \cp config/.colorrc ~/
