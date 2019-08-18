@@ -9,6 +9,12 @@
 # -----------------------------
 # 色を使用
 autoload -Uz colors ; colors
+autoload -Uz is-at-least
+autoload -Uz vcs_info
+autoload -Uz add-zsh-hook
+# 自動補完を有効にする
+autoload -Uz compinit ; compinit
+
 # Ctrl+Dでログアウトしてしまうことを防ぐ
 #setopt IGNOREEOF
 # パスを追加したい場合
@@ -276,7 +282,6 @@ function _update_vcs_info_msg() {
 }
 add-zsh-hook precmd _update_vcs_info_msg
 
-autoload -Uz vcs_info
 # Prompt内で変数展開・コマンド置換・算術演算を実行する
 setopt prompt_subst
 # コピペしやすいようにコマンド実行後は右プロンプトを消す。
@@ -285,8 +290,6 @@ setopt transient_rprompt
 # -----------------------------
 # Completion
 # -----------------------------
-# 自動補完を有効にする
-autoload -Uz compinit ; compinit
 # 単語の入力途中でもTab補完を有効化
 setopt complete_in_word
 # コマンドミスを修正
