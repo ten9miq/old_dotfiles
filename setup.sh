@@ -9,13 +9,13 @@ echo '###  .vim/bundle/ .ssh/config             TO YOUR HOME DIRECTORY.         
 echo '###############################################################################'
 
 # 実行OSの判定処理開始
-if [ "$(uname)" == 'Darwin' ]; then
+if [ "$(uname)" = 'Darwin' ]; then
   OS='Mac'
-elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
+elif [ "$(expr substr $(uname -s) 1 5)" = 'Linux' ]; then
   OS='Linux'
-elif [ "$(expr substr $(uname -s) 1 10)" == 'MINGW32_NT' ]; then
+elif [ "$(expr substr $(uname -s) 1 10)" = 'MINGW32_NT' ]; then
   OS='Cygwin'
-elif [ "$(expr substr $(uname -s) 1 10)" == 'MINGW64_NT' ]; then
+elif [ "$(expr substr $(uname -s) 1 10)" = 'MINGW64_NT' ]; then
   OS='Cygwin'
 else
   echo "Your platform ($(uname -a)) is not supported."
@@ -43,7 +43,7 @@ fi
 # 自身の独自コマンド実行ファイルをコピー
 \cp -r bin ~/
 
-if [ "${OS}" == 'Linux' ] ; then
+if [ "${OS}" = 'Linux' ] ; then
   echo "OS Linux!!"
   \cp config/.tmux.conf ~/.tmux.conf
   # \cp config/.gitignore ~/
