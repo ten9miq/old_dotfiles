@@ -65,6 +65,12 @@ setopt auto_pushd
 setopt pushd_ignore_dups
 # ディレクトリ名の入力のみで移動する
 setopt auto_cd
+
+# cdを移動を便利にするenhancdを追加
+if [ -f ~/.read_conf/enhancd/init.sh ]; then
+    source ~/.read_conf/enhancd/init.sh
+fi
+
 # -----------------------------
 # KeyBind
 # -----------------------------
