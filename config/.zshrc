@@ -43,7 +43,7 @@ setopt brace_ccl
 #
 ## 実行したプロセスの消費時間が3秒以上かかったら
 ## 自動的に消費時間の統計情報を表示する。
-REPORTTIME=5
+REPORTTIME=3
 
 ## 「/」も単語区切りとみなす。
 WORDCHARS=${WORDCHARS:s,/,,}
