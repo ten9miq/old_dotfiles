@@ -37,7 +37,7 @@ setopt no_clobber
 # 各コマンドが実行されるときにパスをハッシュに入れる
 #setopt hash_cmds
 # 範囲指定できるようにする
-# 例 : mkdir {1-3} で フォルダ1, 2, 3を作れる
+# 例 : mkdir {1..3} で フォルダ1, 2, 3を作れる
 setopt brace_ccl
 
 #
