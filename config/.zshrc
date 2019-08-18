@@ -19,17 +19,11 @@ autoload -Uz compinit ; compinit
 #setopt IGNOREEOF
 # パスを追加したい場合
 export PATH="$HOME/bin:$PATH"
-# cdで移動してもpushdと同じようにディレクトリスタックに追加する。
-setopt auto_pushd
-# ディレクトリスタックへの追加の際に重複させない
-setopt pushd_ignore_dups
 
 # ビープ音を鳴らさないようにする
 setopt no_beep
 # カッコの対応などを自動的に補完する
 setopt auto_param_keys
-# ディレクトリ名の入力のみで移動する
-setopt auto_cd
 # bgプロセスの状態変化を即時に知らせる
 setopt notify
 # 8bit文字を有効にする
@@ -38,8 +32,6 @@ setopt print_eight_bit
 setopt print_exit_value
 # 上書きリダイレクトの禁止
 setopt no_clobber
-# パスの最後のスラッシュを削除しない
-setopt noautoremoveslash
 # 各コマンドが実行されるときにパスをハッシュに入れる
 #setopt hash_cmds
 # 範囲指定できるようにする
@@ -61,6 +53,18 @@ WORDCHARS=${WORDCHARS:s,/,,}
 # コマンド入力中にサジェストを表示する
 [ -f ~/.read_conf/zsh-autosuggestions/zsh-autosuggestions.zsh ] \
   && source ~/.read_conf/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# -----------------------------
+# ディレクトリ移動関係
+# -----------------------------
+# パスの最後のスラッシュを削除しない
+setopt noautoremoveslash
+# cdで移動してもpushdと同じようにディレクトリスタックに追加する。
+setopt auto_pushd
+# ディレクトリスタックへの追加の際に重複させない
+setopt pushd_ignore_dups
+# ディレクトリ名の入力のみで移動する
+setopt auto_cd
 # -----------------------------
 # KeyBind
 # -----------------------------
