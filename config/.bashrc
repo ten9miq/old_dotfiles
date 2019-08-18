@@ -114,3 +114,9 @@ dispatch () {
 # 新しいプロンプトが表示される前に実行されるコマンド
 export PROMPT_COMMAND="dispatch"
 
+# -----------------------------
+# functions
+# -----------------------------
+# 関数の読み込み
+[ -f ~/.read_conf/.functions ] && source ~/.read_conf/.functions
+
