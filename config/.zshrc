@@ -337,6 +337,8 @@ fi
 setopt complete_in_word
 # コマンドミスを修正
 setopt correct
+# コマンドライン全てのスペルチェックをする
+setopt correct_all
 # 補完候補が複数ある時、一覧表示 (auto_list) せず、すぐに最初の候補を補完する
 #setopt menu_complete # 強制で最初のが選択されるのが使いづらいので無効化
 # 補完候補をできるだけ詰めて表示する
@@ -361,10 +363,6 @@ setopt interactive_comments
 setopt globdots
 # ファイル名の展開でディレクトリにマッチした場合 末尾に / を付加
 setopt mark_dirs
-# コマンドのスペルチェックをする
-setopt correct
-# コマンドライン全てのスペルチェックをする
-setopt correct_all
 
 
 # 補完キー連打で順に補完候補を自動で補完
