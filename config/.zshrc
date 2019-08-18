@@ -407,3 +407,15 @@ alias -g L='| less'
 alias -g H='| head'
 alias -g G='| grep'
 alias -g GI='| grep -ri'
+
+# グローバルエイリアスを展開する
+# http://blog.patshead.com/2012/11/automatically-expaning-zsh-global-aliases---simplified.html
+globalias() {
+  if [[ $LBUFFER =~ ' [A-Z0-9]+$' ]]; then
+    zle _expand_alias
+    # zle expand-word
+  fi
+  zle self-insert
+}
+zle -N globalias
+bindkey " " globalias
