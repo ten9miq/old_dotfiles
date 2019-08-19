@@ -49,12 +49,12 @@ REPORTTIME=3
 WORDCHARS=${WORDCHARS:s,/,,}
 
 # プロンプト上でのコマンドなどのシンタックスハイライトを有効にする
-[ -f ~/.read_conf/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] \
-  && source ~/.read_conf/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[ -f ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] \
+  && source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # コマンド入力中にサジェストを表示する
-[ -f ~/.read_conf/zsh-autosuggestions/zsh-autosuggestions.zsh ] \
-  && source ~/.read_conf/zsh-autosuggestions/zsh-autosuggestions.zsh
+[ -f ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ] \
+  && source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # -----------------------------
 # ディレクトリ移動関係
@@ -109,11 +109,6 @@ function chpwd() {
 add-zsh-hook chpwd chpwd_recent_dirs
 # cdrコマンドで履歴にないディレクトリにも移動可能に
 zstyle ":chpwd:*" recent-dirs-default true
-
-# cdを移動を便利にするenhancdを追加
-if [ -f ~/.read_conf/enhancd/init.sh ]; then
-    source ~/.read_conf/enhancd/init.sh
-fi
 
 # -----------------------------
 # KeyBind
@@ -371,8 +366,8 @@ add-zsh-hook precmd _update_vcs_info_msg
 if [ -e ~/.zsh/completions ]; then
   fpath=(~/.zsh/completions $fpath)
 fi
-if [ -e ~/.read_conf/zsh-completions/src ]; then
-  fpath=(~/.read_conf/zsh-completions/src $fpath)
+if [ -e ~/.zsh/zsh-completions/src ]; then
+  fpath=(~/.zsh/zsh-completions/src $fpath)
 fi
 
 # 単語の入力途中でもTab補完を有効化
