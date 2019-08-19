@@ -7,6 +7,9 @@
 # -----------------------------
 # General
 # -----------------------------
+# tmux上でも256色に対応するための設定
+export TERM=xterm-256color
+
 # 色を使用
 autoload -Uz colors ; colors
 autoload -Uz is-at-least
