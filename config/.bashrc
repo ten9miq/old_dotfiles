@@ -3,6 +3,9 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
+# 共通環境変数のファイルの読み込み
+[ -f ~/.read_conf/.env] && source ~/.read_conf/.env
+
 # bashでコマンド補完を有効にするためのshellの読み込み処理
 COMP_PATH=$HOME/.bash_source_sh/
 for f in `\find ${COMP_PATH} -maxdepth 1 -type f `; do
@@ -19,9 +22,6 @@ complete -F _docker_compose sdc # sdc のあとでもdocker-composeの補完を�
 complete -F _docker d # d 1文字のあとでもdockerの補完を有効に
 complete -F _docker sd # sd 1文字のあとでもdockerの補完を有効に
 complete -cf sudo # sudo入力中にコマンド補完ができるようにする
-
-# tmux上でも256色に対応するための設定
-export TERM=xterm-256color
 
 # ls --color=autoで緑背景の一部が見にくいので文字色を変更
 eval `dircolors ~/.colorrc`
@@ -119,4 +119,15 @@ export PROMPT_COMMAND="dispatch"
 # -----------------------------
 # 関数の読み込み
 [ -f ~/.read_conf/.functions ] && source ~/.read_conf/.functions
+
+# -----------------------------
+# fzfのファイル読み込み
+# -----------------------------
+# Auto-completion
+# ---------------
+[[ $- == *i* ]] && source "$HOME/bin/.fzf/shell/completion.bash" 2> /dev/null
+
+# Key bindings
+# ------------
+source "$HOME/bin/.fzf/shell/key-bindings.bash"
 

@@ -7,8 +7,8 @@
 # -----------------------------
 # General
 # -----------------------------
-# tmux上でも256色に対応するための設定
-export TERM=xterm-256color
+# 共通環境変数のファイルの読み込み
+[ -f ~/.read_conf/.env] && source ~/.read_conf/.env
 
 # 色を使用
 autoload -Uz colors ; colors
@@ -22,8 +22,6 @@ autoload -Uz chpwd_recent_dirs cdr
 
 # Ctrl+Dでログアウトしてしまうことを防ぐ
 #setopt IGNOREEOF
-# パスを追加したい場合
-export PATH="$HOME/bin:$PATH"
 
 # ビープ音を鳴らさないようにする
 setopt no_beep
@@ -113,6 +111,10 @@ add-zsh-hook chpwd chpwd_recent_dirs
 # cdrコマンドで履歴にないディレクトリにも移動可能に
 zstyle ":chpwd:*" recent-dirs-default true
 
+# cdを移動を便利にするenhancdを追加
+if [ -f ~/.zsh/enhancd/init.sh ]; then
+  source ~/.zsh/enhancd/init.sh
+fi
 # -----------------------------
 # KeyBind
 # -----------------------------
@@ -498,3 +500,17 @@ bindkey " " globalias
 # 関数の読み込み
 [ -f ~/.read_conf/.functions ] && source ~/.read_conf/.functions
 
+# -----------------------------
+# fzfのファイル読み込み
+# -----------------------------
+if [[ ! "$PATH" == *$HOME/bin/.fzf/bin* ]]; then
+   export PATH="${PATH:+${PATH}:}$HOME/bin/.fzf/bin"
+fi
+
+# Auto-completion
+# ---------------
+[[ $- == *i* ]] && source "$HOME/bin/.fzf/shell/completion.zsh" 2> /dev/null
+
+# Key bindings
+# ------------
+source "$HOME/bin/.fzf/shell/key-bindings.zsh"
