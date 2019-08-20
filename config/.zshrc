@@ -387,8 +387,10 @@ setopt interactive_comments
 setopt globdots
 # ファイル名の展開でディレクトリにマッチした場合 末尾に / を付加
 setopt mark_dirs
-# aliasを展開して補完
-# setopt no_complete_aliases # sgの補完がうまくいかないので無効化
+# aliasを展開して補完を行う
+setopt no_complete_aliases
+# aliasが展開されていない状態で補完を行う
+# setopt complete_aliases
 
 
 # 補完キー連打で順に補完候補を自動で補完
@@ -514,13 +516,11 @@ fi
 [ -f ~/.read_conf/.alias ] && source ~/.read_conf/.alias
 
 # それぞれのaliasに対応
-# setopt no_complete_aliasesで対応できるはずだが
-# alias sg='sudo git -c xxxx'に対応できないので下記で補完が効くようにする
+# setopt no_complete_aliasesでalisaを展開したあととして補完が対応できるはずだが
+# alias sg='sudo git -c xxxx'を展開すると-あとのパラメータの補完ができない
+# そのためaliasに関数を紐付けることで補完が効くようにする
 # compinitのあとでないとcomdefのエラーを吐く
-compdef _git g
-compdef _git sg
-compdef _docker docker
-compdef _docker-compose docker-compose
+compdef sudo_git=git
 
 # zshのglobal alias
 alias -g L='| less'

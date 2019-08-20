@@ -12,7 +12,12 @@ alias svi='sudo_vim'
 alias hg='history | grep'
 alias lessf='less -N+F'
 alias g='git'
-alias sg='sudo git -c "include.path='"${XDG_CONFIG_DIR:-$HOME/.config}/git/config\" -c \"include.path=$HOME/.gitconfig\""
+alias sg="sudo_git"
+
+sudo_git(){
+  sudo git -c 'include.path='"${XDG_CONFIG_DIR:-$HOME/.config}"'/git/config' -c 'include.path='"${HOME}/.gitconfig" $@
+}
+
 alias ...='cd ../..'
 alias ....='cd ../../..'
 

@@ -13,7 +13,7 @@ for f in `\find ${COMP_PATH} -maxdepth 1 -type f `; do
 done
 
 __git_complete g __git_main # g 1文字のあとでもgitの補完を有効に
-__git_complete sg __git_main # g 1文字のあとでもgitの補完を有効に
+__git_complete sg __git_main # sg 2文字のあとでもgitの補完を有効に
 # 残りのgitのaliasの補完はファイルに直接記載
 # dockerのコマンド補完を有効にするためのshell
 complete -F _docker_compose dc # dc のあとでもdocker-composeの補完を有効に
