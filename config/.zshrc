@@ -68,6 +68,12 @@ setopt auto_pushd
 setopt pushd_ignore_dups
 # ディレクトリ名の入力のみで移動する
 setopt auto_cd
+#移動先がシンボリックリンクならば実際のディレクトリに移動する
+setopt chase_links
+#パスに..が含まれる シンボリックリンクではなく実際のディレクトリに移動
+setopt chase_dots
+#引数なしでpushdするとpushd $HOMEとして実行
+setopt pushd_to_home
 # 移動後にls
 function chpwd() {
   # cd後にls実行時に10行より多い場合は、前後5行づつ表示する
@@ -405,6 +411,8 @@ setopt interactive_comments
 setopt globdots
 # ファイル名の展開でディレクトリにマッチした場合 末尾に / を付加
 setopt mark_dirs
+# aliasを展開して補完
+setopt no_complete_aliases
 
 
 # 補完キー連打で順に補完候補を自動で補完
@@ -442,6 +450,19 @@ zstyle ':completion:*' format '%B%d%b'
 zstyle ':completion:*' group-name ''
 # cd ../の時に今いるディレクトリを補完候補から外す
 zstyle ':completion:*' ignore-parents parent pwd ..
+
+# 補完候補のメニュー選択で、矢印キーの代わりにhjklで移動出来るようにする。
+zmodload zsh/complist
+bindkey -M menuselect '^h' vi-backward-char # 左
+bindkey -M menuselect '^j' vi-down-line-or-history # 下
+bindkey -M menuselect '^k' vi-up-line-or-history # 上
+bindkey -M menuselect '^l' vi-forward-char # 右
+
+autoload history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey "^P" history-beginning-search-backward-end
+bindkey "^N" history-beginning-search-forward-end
 
 # -----------------------------
 # History
