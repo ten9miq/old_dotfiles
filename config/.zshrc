@@ -327,7 +327,7 @@ setopt hist_reduce_blanks
 # 履歴をすぐに追加する
 setopt inc_append_history
 # ヒストリを呼び出してから実行する間に一旦編集できる状態になる
-setopt hist_verify
+# setopt hist_verify
 #余分なスペースを削除してヒストリに記録する
 setopt hist_reduce_blanks
 # historyコマンドは残さない
