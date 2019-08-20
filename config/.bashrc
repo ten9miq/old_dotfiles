@@ -4,7 +4,7 @@ if [ -f /etc/bashrc ]; then
 fi
 
 # 共通環境変数のファイルの読み込み
-[ -f ~/.read_conf/.env] && source ~/.read_conf/.env
+[ -f ~/.read_conf/.env ] && source ~/.read_conf/.env
 
 # bashでコマンド補完を有効にするためのshellの読み込み処理
 COMP_PATH=$HOME/.bash_source_sh/
