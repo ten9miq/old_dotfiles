@@ -12,13 +12,7 @@
 
 # 色を使用
 autoload -Uz colors ; colors
-autoload -Uz is-at-least
-autoload -Uz vcs_info
 autoload -Uz add-zsh-hook
-# 自動補完を有効にする
-autoload -Uz compinit ; compinit
-# cdrコマンドを有効 ログアウトしても有効なディレクトリ履歴
-autoload -Uz chpwd_recent_dirs cdr
 
 # Ctrl+Dでログアウトしてしまうことを防ぐ
 #setopt IGNOREEOF
@@ -58,70 +52,6 @@ WORDCHARS=${WORDCHARS:s,/,,}
   && source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # -----------------------------
-# ディレクトリ移動関係
-# -----------------------------
-# パスの最後のスラッシュを削除しない
-setopt noautoremoveslash
-# cdで移動してもpushdと同じようにディレクトリスタックに追加する。
-setopt auto_pushd
-# ディレクトリスタックへの追加の際に重複させない
-setopt pushd_ignore_dups
-# ディレクトリ名の入力のみで移動する
-setopt auto_cd
-#移動先がシンボリックリンクならば実際のディレクトリに移動する
-setopt chase_links
-#パスに..が含まれる シンボリックリンクではなく実際のディレクトリに移動
-setopt chase_dots
-#引数なしでpushdするとpushd $HOMEとして実行
-setopt pushd_to_home
-# 移動後にls
-function chpwd() {
-  # cd後にls実行時に10行より多い場合は、前後5行づつ表示する
-  if [[ ! -r $PWD ]]; then
-    return
-  fi
-  # -a : Do not ignore entries starting with ..
-    # -C : Force multi-column output.
-    # -F : Append indicator (one of */=>@|) to entries.
-    local cmd_ls='ls'
-    local -a opt_ls
-    opt_ls=('-AXCF' '--group-directories-first' '--color=always')
-    case "${OSTYPE}" in
-      freebsd*|darwin*)
-        if type gls > /dev/null 2>&1; then
-          cmd_ls='gls'
-        else
-          # -G : Enable colorized output.
-          opt_ls=('-aCFG')
-        fi
-        ;;
-    esac
-
-    local ls_result
-    ls_result=$(CLICOLOR_FORCE=1 COLUMNS=$COLUMNS command $cmd_ls ${opt_ls[@]} | sed $'/^\e\[[0-9;]*m$/d')
-
-    local ls_lines=$(echo "$ls_result" | wc -l | tr -d ' ')
-
-    if [ $ls_lines -gt 10 ]; then
-      echo "$ls_result" | head -n 5
-      echo '...'
-      echo "$ls_result" | tail -n 5
-      echo "$(command ls -1 -A | wc -l | tr -d ' ') files exist"
-    else
-      echo "$ls_result"
-    fi
-}
-
-# cdr タブでリストを表示
-add-zsh-hook chpwd chpwd_recent_dirs
-# cdrコマンドで履歴にないディレクトリにも移動可能に
-zstyle ":chpwd:*" recent-dirs-default true
-
-# cdを移動を便利にするenhancdを追加
-if [ -f ~/.zsh/enhancd/init.sh ]; then
-  source ~/.zsh/enhancd/init.sh
-fi
-# -----------------------------
 # KeyBind
 # -----------------------------
 # エディタをvimに設定
@@ -140,6 +70,9 @@ bindkey '\C-g' forward-word
 # ^P,^Nを検索へ割り当て
 # bindkey "^P" history-search-backward
 # bindkey "^N" history-search-forward
+
+# fzfのKey bindings
+source "$HOME/bin/.fzf/shell/key-bindings.zsh"
 
 # -----------------------------
 # Prompt
@@ -196,6 +129,9 @@ setopt transient_rprompt
 #PROMPT='%F{cyan}%n@%m%f:%~# '
 PROMPT="%F{245}[%{%D %*]%f${fg[cyan]}%} %~%{${reset_color}%}
 %F{200}%n%f%F{021}@%f%F{green}%m%f $ "
+
+autoload -Uz is-at-least
+autoload -Uz vcs_info
 
 if is-at-least 4.3.11; then
   # 以下の3つのメッセージをエクスポートする
@@ -371,6 +307,40 @@ function _update_vcs_info_msg() {
 add-zsh-hook precmd _update_vcs_info_msg
 
 # -----------------------------
+# History
+# -----------------------------
+# 基本設定
+HISTFILE=$HOME/.zsh-history
+HISTSIZE=100000
+SAVEHIST=1000000
+
+# ヒストリーに重複を表示しない
+setopt histignorealldups
+# 他のターミナルとヒストリーを共有
+setopt share_history
+# すでにhistoryにあるコマンドは残さない
+setopt hist_ignore_all_dups
+# historyに日付を表示
+alias h='fc -lt '%F %T' 1'
+# ヒストリに保存するときに余分なスペースを削除する
+setopt hist_reduce_blanks
+# 履歴をすぐに追加する
+setopt inc_append_history
+# ヒストリを呼び出してから実行する間に一旦編集できる状態になる
+setopt hist_verify
+#余分なスペースを削除してヒストリに記録する
+setopt hist_reduce_blanks
+# historyコマンドは残さない
+setopt hist_save_no_dups
+
+# -----------------------------
+# functions
+# -----------------------------
+# 関数の読み込み
+[ -f ~/.read_conf/.functions ] && source ~/.read_conf/.functions
+
+
+# -----------------------------
 # Completion
 # -----------------------------
 # 補完ファイルの読み込み
@@ -380,6 +350,12 @@ fi
 if [ -e ~/.zsh/zsh-completions/src ]; then
   fpath=(~/.zsh/zsh-completions/src $fpath)
 fi
+# fzfのAuto-completion
+[[ $- == *i* ]] && source "$HOME/bin/.fzf/shell/completion.zsh" 2> /dev/null
+
+# 自動補完を有効にする
+# これはほかの補完ファイルを読み込んだ後に実行しないと意味がない
+autoload -Uz compinit ; compinit
 
 # 単語の入力途中でもTab補完を有効化
 setopt complete_in_word
@@ -412,7 +388,7 @@ setopt globdots
 # ファイル名の展開でディレクトリにマッチした場合 末尾に / を付加
 setopt mark_dirs
 # aliasを展開して補完
-setopt no_complete_aliases
+# setopt no_complete_aliases # sgの補完がうまくいかないので無効化
 
 
 # 補完キー連打で順に補完候補を自動で補完
@@ -465,37 +441,86 @@ bindkey "^P" history-beginning-search-backward-end
 bindkey "^N" history-beginning-search-forward-end
 
 # -----------------------------
-# History
+# ディレクトリ移動関係
 # -----------------------------
-# 基本設定
-HISTFILE=$HOME/.zsh-history
-HISTSIZE=100000
-SAVEHIST=1000000
+# パスの最後のスラッシュを削除しない
+setopt noautoremoveslash
+# cdで移動してもpushdと同じようにディレクトリスタックに追加する。
+setopt auto_pushd
+# ディレクトリスタックへの追加の際に重複させない
+setopt pushd_ignore_dups
+# ディレクトリ名の入力のみで移動する
+setopt auto_cd
+#移動先がシンボリックリンクならば実際のディレクトリに移動する
+setopt chase_links
+#パスに..が含まれる シンボリックリンクではなく実際のディレクトリに移動
+setopt chase_dots
+#引数なしでpushdするとpushd $HOMEとして実行
+setopt pushd_to_home
+# 移動後にls
+function chpwd() {
+  # cd後にls実行時に10行より多い場合は、前後5行づつ表示する
+  if [[ ! -r $PWD ]]; then
+    return
+  fi
+  # -a : Do not ignore entries starting with ..
+    # -C : Force multi-column output.
+    # -F : Append indicator (one of */=>@|) to entries.
+    local cmd_ls='ls'
+    local -a opt_ls
+    opt_ls=('-AXCF' '--group-directories-first' '--color=always')
+    case "${OSTYPE}" in
+      freebsd*|darwin*)
+        if type gls > /dev/null 2>&1; then
+          cmd_ls='gls'
+        else
+          # -G : Enable colorized output.
+          opt_ls=('-aCFG')
+        fi
+        ;;
+    esac
 
-# ヒストリーに重複を表示しない
-setopt histignorealldups
-# 他のターミナルとヒストリーを共有
-setopt share_history
-# すでにhistoryにあるコマンドは残さない
-setopt hist_ignore_all_dups
-# historyに日付を表示
-alias h='fc -lt '%F %T' 1'
-# ヒストリに保存するときに余分なスペースを削除する
-setopt hist_reduce_blanks
-# 履歴をすぐに追加する
-setopt inc_append_history
-# ヒストリを呼び出してから実行する間に一旦編集できる状態になる
-setopt hist_verify
-#余分なスペースを削除してヒストリに記録する
-setopt hist_reduce_blanks
-# historyコマンドは残さない
-setopt hist_save_no_dups
+    local ls_result
+    ls_result=$(CLICOLOR_FORCE=1 COLUMNS=$COLUMNS command $cmd_ls ${opt_ls[@]} | sed $'/^\e\[[0-9;]*m$/d')
 
+    local ls_lines=$(echo "$ls_result" | wc -l | tr -d ' ')
+
+    if [ $ls_lines -gt 10 ]; then
+      echo "$ls_result" | head -n 5
+      echo '...'
+      echo "$ls_result" | tail -n 5
+      echo "$(command ls -1 -A | wc -l | tr -d ' ') files exist"
+    else
+      echo "$ls_result"
+    fi
+}
+
+# cdrコマンドを有効 ログアウトしても有効なディレクトリ履歴
+autoload -Uz chpwd_recent_dirs cdr
+# cdr タブでリストを表示
+add-zsh-hook chpwd chpwd_recent_dirs
+# cdrコマンドで履歴にないディレクトリにも移動可能に
+zstyle ":chpwd:*" recent-dirs-default true
+
+# cdを移動を便利にするenhancdを追加
+# compinitのあとでないとcomdefのエラーを吐く
+if [ -f ~/.zsh/enhancd/init.sh ]; then
+  source ~/.zsh/enhancd/init.sh
+fi
 # -----------------------------
 # alias
 # -----------------------------
 # aliasの読み込み
 [ -f ~/.read_conf/.alias ] && source ~/.read_conf/.alias
+
+# それぞれのaliasに対応
+# setopt no_complete_aliasesで対応できるはずだが
+# alias sg='sudo git -c xxxx'に対応できないので下記で補完が効くようにする
+# compinitのあとでないとcomdefのエラーを吐く
+compdef _git g
+compdef _git sg
+compdef _docker docker
+compdef _docker-compose docker-compose
 
 # zshのglobal alias
 alias -g L='| less'
@@ -514,25 +539,4 @@ globalias() {
 }
 zle -N globalias
 bindkey " " globalias
-
-# -----------------------------
-# functions
-# -----------------------------
-# 関数の読み込み
-[ -f ~/.read_conf/.functions ] && source ~/.read_conf/.functions
-
-# -----------------------------
-# fzfのファイル読み込み
-# -----------------------------
-if [[ ! "$PATH" == *$HOME/bin/.fzf/bin* ]]; then
-   export PATH="${PATH:+${PATH}:}$HOME/bin/.fzf/bin"
-fi
-
-# Auto-completion
-# ---------------
-[[ $- == *i* ]] && source "$HOME/bin/.fzf/shell/completion.zsh" 2> /dev/null
-
-# Key bindings
-# ------------
-source "$HOME/bin/.fzf/shell/key-bindings.zsh"
 
