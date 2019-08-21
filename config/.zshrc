@@ -367,7 +367,7 @@ setopt correct
 # コマンドライン全てのスペルチェックをする
 setopt correct_all
 # 補完候補が複数ある時、一覧表示 (auto_list) せず、すぐに最初の候補を補完する
-#setopt menu_complete # 強制で最初のが選択されるのが使いづらいので無効化
+setopt menu_complete # 強制で最初のが選択されるのが使いづらいので無効化
 # 補完候補をできるだけ詰めて表示する
 setopt list_packed
 # 補完候補にファイルの種類も表示する(ls -Fの記号)
@@ -400,6 +400,9 @@ setopt no_complete_aliases
 # select=2: 補完候補を一覧から選択する。
 #           ただし、補完候補が2つ以上なければすぐに補完する。
 zstyle ':completion:*' menu select=2
+# 補完候補を表示したときに続けてキーを入力するとインタラクティブに絞り込む
+# setopt menu_completeが必要
+# zstyle ':completion:*' menu select interactive
 # キャッシュの利用による補完の高速化
 zstyle ':completion::complete:*' use-cache true
 #zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
@@ -438,6 +441,7 @@ bindkey -M menuselect '^h' vi-backward-char # 左
 bindkey -M menuselect '^j' vi-down-line-or-history # 下
 bindkey -M menuselect '^k' vi-up-line-or-history # 上
 bindkey -M menuselect '^l' vi-forward-char # 右
+bindkey -M menuselect '^r' history-incremental-search-forward # 補完候補内インクリメンタルサーチ
 
 autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
