@@ -55,29 +55,6 @@ WORDCHARS=${WORDCHARS:s,/,,}
   && source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # -----------------------------
-# KeyBind
-# -----------------------------
-# エディタをvimに設定
-export EDITOR=vim
-bindkey -d  # いったんキーバインドをリセット
-bindkey -e  # emacsモードで使う
-# bindkey -a  # vicmdモード
-# bindkey -v # viinsモード
-
-bindkey '\C-j' backward-word
-bindkey '\C-g' forward-word
-
-# ^R で履歴検索をするときに * でワイルドカードを使用出来るようにする
-#bindkey '^R' history-incremental-pattern-search-backward
-#bindkey "^S" history-incremental-search-forward
-# ^P,^Nを検索へ割り当て
-# bindkey "^P" history-search-backward
-# bindkey "^N" history-search-forward
-
-# fzfのKey bindings
-source "$HOME/bin/.fzf/shell/key-bindings.zsh"
-
-# -----------------------------
 # Prompt
 # -----------------------------
 # %M    ホスト名
@@ -366,6 +343,8 @@ setopt complete_in_word
 setopt correct
 # コマンドライン全てのスペルチェックをする
 setopt correct_all
+# 指摘時の表示を変更
+SPROMPT="correct: $RED%R$DEFAULT -> $GREEN%r$DEFAULT ? [Yes/No/Abort/Edit] => "
 # 補完候補が複数ある時、一覧表示 (auto_list) せず、すぐに最初の候補を補完する
 setopt menu_complete # 強制で最初のが選択されるのが使いづらいので無効化
 # 補完候補をできるだけ詰めて表示する
@@ -435,19 +414,42 @@ zstyle ':completion:*' group-name ''
 # cd ../の時に今いるディレクトリを補完候補から外す
 zstyle ':completion:*' ignore-parents parent pwd ..
 
-# 補完候補のメニュー選択で、矢印キーの代わりにhjklで移動出来るようにする。
-zmodload zsh/complist
-bindkey -M menuselect '^h' vi-backward-char # 左
-bindkey -M menuselect '^j' vi-down-line-or-history # 下
-bindkey -M menuselect '^k' vi-up-line-or-history # 上
-bindkey -M menuselect '^l' vi-forward-char # 右
-bindkey -M menuselect '^r' history-incremental-search-forward # 補完候補内インクリメンタルサーチ
+# -----------------------------
+# KeyBind
+# -----------------------------
+# エディタをvimに設定
+export EDITOR=vim
+bindkey -d  # いったんキーバインドをリセット
+bindkey -e  # emacsモードで使う
+# bindkey -a  # vicmdモード
+# bindkey -v # viinsモード
+
+bindkey '\C-j' backward-word
+bindkey '\C-g' forward-word
+# esc+hで単語単位での削除
+bindkey 'h' vi-backward-kill-word
 
 autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
 bindkey "^P" history-beginning-search-backward-end
 bindkey "^N" history-beginning-search-forward-end
+
+# fzfのKey bindings
+source "$HOME/bin/.fzf/shell/key-bindings.zsh"
+
+# 補完候補のメニュー選択で、矢印キーの代わりにhjklで移動出来るようにする。
+zmodload zsh/complist
+bindkey -M menuselect '^i' vi-backward-char # 左
+bindkey -M menuselect '^h' vi-backward-char # 左 これが動作しない
+bindkey -M menuselect '^j' vi-down-line-or-history # 下
+bindkey -M menuselect '^k' vi-up-line-or-history # 上
+bindkey -M menuselect '^l' vi-forward-char # 右
+bindkey -M menuselect '^r' history-incremental-search-forward # 補完候補内インクリメンタルサーチ
+
+# ctrl+hでmenuselectで左に動けず、削除をしてしまう問題への対策を研究中
+# tty -s && stty erase undef #ttyのctrl+hを無効化 その代わりvim上でbackspaceが効かない
+# bindkey -r '^h' # zshのctrl+hを無効化
 
 # -----------------------------
 # ディレクトリ移動関係
@@ -504,18 +506,26 @@ function chpwd() {
     fi
 }
 
+# -----------------------------
+# cdr の設定
+# -----------------------------
 # cdrコマンドを有効 ログアウトしても有効なディレクトリ履歴
 autoload -Uz chpwd_recent_dirs cdr
 # cdr タブでリストを表示
 add-zsh-hook chpwd chpwd_recent_dirs
 # cdrコマンドで履歴にないディレクトリにも移動可能に
 zstyle ":chpwd:*" recent-dirs-default true
+zstyle ':completion:*' recent-dirs-insert both
+zstyle ':chpwd:*' recent-dirs-max 500
+zstyle ':chpwd:*' recent-dirs-file "$HOME/.cache/shell/chpwd-recent-dirs"
+zstyle ':chpwd:*' recent-dirs-pushd true
 
 # cdを移動を便利にするenhancdを追加
 # compinitのあとでないとcomdefのエラーを吐く
 if [ -f ~/.zsh/enhancd/init.sh ]; then
   source ~/.zsh/enhancd/init.sh
 fi
+
 # -----------------------------
 # alias
 # -----------------------------
