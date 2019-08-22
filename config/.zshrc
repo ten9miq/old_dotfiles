@@ -440,11 +440,15 @@ source "$HOME/bin/.fzf/shell/key-bindings.zsh"
 
 # 補完候補のメニュー選択で、矢印キーの代わりにhjklで移動出来るようにする。
 zmodload zsh/complist
-bindkey -M menuselect '^i' vi-backward-char # 左
+#bindkey -M menuselect '^i' vi-backward-char # 左
 bindkey -M menuselect '^h' vi-backward-char # 左 これが動作しない
 bindkey -M menuselect '^j' vi-down-line-or-history # 下
 bindkey -M menuselect '^k' vi-up-line-or-history # 上
 bindkey -M menuselect '^l' vi-forward-char # 右
+
+bindkey -M menuselect '^n' vi-forward-char # 右
+bindkey -M menuselect '^p' vi-backward-char # 左
+
 bindkey -M menuselect '^r' history-incremental-search-forward # 補完候補内インクリメンタルサーチ
 
 # ctrl+hでmenuselectで左に動けず、削除をしてしまう問題への対策を研究中
