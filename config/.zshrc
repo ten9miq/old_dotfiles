@@ -343,8 +343,8 @@ setopt complete_in_word
 setopt correct
 # コマンドライン全てのスペルチェックをする
 setopt correct_all
-# 指摘時の表示を変更
-SPROMPT="correct: $RED%R$DEFAULT -> $GREEN%r$DEFAULT ? [Yes/No/Abort/Edit] => "
+# コマンドが間違えている時の指摘時の表示を変更
+SPROMPT="correct: $RED%R$DEFAULT -> $GREEN%r$DEFAULT ? [No/yes/abort/edit] => "
 # 補完候補が複数ある時、一覧表示 (auto_list) せず、すぐに最初の候補を補完する
 setopt menu_complete # 強制で最初のが選択されるのが使いづらいので無効化
 # 補完候補をできるだけ詰めて表示する
@@ -529,7 +529,7 @@ if [ -f ~/.zsh/enhancd/init.sh ]; then
   source ~/.zsh/enhancd/init.sh
 fi
 
-# fzf-cdr 
+# fzf-cdr
 alias cdd='fzf-cdr'
 function fzf-cdr() {
     target_dir=`cdr -l | sed 's/^[^ ][^ ]*  *//' | fzf`
