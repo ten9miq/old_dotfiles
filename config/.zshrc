@@ -85,14 +85,8 @@ local LIGHTBLUE=$'%{\e[1;36m%}'
 local WHITE=$'%{\e[1;37m%}'
 local DEFAULT=$'%{\e[1;m%}'
 
-
-# 色の設定
-export LSCOLORS=Exfxcxdxbxegedabagacad
-# 補完時の色設定
-export LS_COLORS='di=01;96:ln=01;35:so=01;32:ex=01;31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
-# 補完候補に色つける
+# 補完候補にLS_COLORSと同じ色をつける
 autoload -U colors ; colors ; zstyle ':completion:*' list-colors "${LS_COLORS}"
-
 
 # zshのの利用可能な色の一覧表示
 zsh_color(){

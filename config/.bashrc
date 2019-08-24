@@ -23,9 +23,6 @@ complete -F _docker d # d 1文字のあとでもdockerの補完を有効に
 complete -F _docker sd # sd 1文字のあとでもdockerの補完を有効に
 complete -cf sudo # sudo入力中にコマンド補完ができるようにする
 
-# ls --color=autoで緑背景の一部が見にくいので文字色を変更
-eval `dircolors ~/.colorrc`
-
 # User specific aliases and functions
 stty stop undef # Ctrl+sでLinuxのターミナルへの出力をロックする機能があるのでそれを無効化する(一応Ctrl+qで抜けれる)
 
