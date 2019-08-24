@@ -70,7 +70,9 @@ shopt -s autocd
 # https://qiita.com/uplus_e10/items/c58ab78e062218dc4eda
 #---------------------------------------------------------------
 autols(){
-  ls_abbrev
+  [[ -n $AUTOLS_DIR ]] && [[ $AUTOLS_DIR != $PWD ]] && ls_abbrev
+  # 複数回表示しないようにパスをキャッシュ
+  AUTOLS_DIR="${PWD}"
 }
 
 # PROMPT_COMMAND="dispatch"で実行適用される(複数適用のためにこのPROMPT_COMMAND_****の環境変数を使う)
