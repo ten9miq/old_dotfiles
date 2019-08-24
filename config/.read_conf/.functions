@@ -103,7 +103,8 @@ ls_abbrev(){
 
   if [ $ls_lines -gt 10 ]; then
     echo "$ls_result" | head -n 5
-    echo '  ...'
+    echo ' ︙'
+    echo ' ︙'
     echo "$ls_result" | tail -n 5
     echo "$(command ls -1 -A | wc -l | tr -d ' ') files exist"
   else
