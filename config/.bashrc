@@ -59,18 +59,18 @@ function parse_git_branch {
 # cd省略してのディレクトリ移動を行う
 shopt -s autocd
 
-# aliasの読み込み
+# 共通aliasの読み込み
 [ -f ~/.read_conf/.alias ] && source ~/.read_conf/.alias
 
+# functionの共通関数の読み込み
+[ -f ~/.read_conf/.functions ] && source ~/.read_conf/.functions
 
 #---------------------------------------------------------------
 # cd autocd pushd popd でディレクトリ移動したら自動でlsコマンドを実行
 # https://qiita.com/uplus_e10/items/c58ab78e062218dc4eda
 #---------------------------------------------------------------
 autols(){
-  [[ -n $AUTOLS_DIR ]] && [[ $AUTOLS_DIR != $PWD ]] && ls
-  # 複数回表示しないようにパスをキャッシュ
-  AUTOLS_DIR="${PWD}"
+  ls_abbrev
 }
 
 # PROMPT_COMMAND="dispatch"で実行適用される(複数適用のためにこのPROMPT_COMMAND_****の環境変数を使う)
@@ -111,20 +111,14 @@ dispatch () {
 # 新しいプロンプトが表示される前に実行されるコマンド
 export PROMPT_COMMAND="dispatch"
 
-# -----------------------------
-# functions
-# -----------------------------
-# 関数の読み込み
-[ -f ~/.read_conf/.functions ] && source ~/.read_conf/.functions
-
-# -----------------------------
 # fzfのファイル読み込み
 # -----------------------------
 # Auto-completion
-# ---------------
+# -----------------------------
 [[ $- == *i* ]] && source "$HOME/bin/.fzf/shell/completion.bash" 2> /dev/null
 
+# -----------------------------
 # Key bindings
-# ------------
+# -----------------------------
 source "$HOME/bin/.fzf/shell/key-bindings.bash"
 

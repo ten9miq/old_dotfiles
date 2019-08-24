@@ -466,43 +466,8 @@ setopt chase_links
 setopt chase_dots
 #引数なしでpushdするとpushd $HOMEとして実行
 setopt pushd_to_home
-# 移動後にls
-function chpwd() {
-  # cd後にls実行時に10行より多い場合は、前後5行づつ表示する
-  if [[ ! -r $PWD ]]; then
-    return
-  fi
-  # -a : Do not ignore entries starting with ..
-    # -C : Force multi-column output.
-    # -F : Append indicator (one of */=>@|) to entries.
-    local cmd_ls='ls'
-    local -a opt_ls
-    opt_ls=('-AXCF' '--group-directories-first' '--color=always')
-    case "${OSTYPE}" in
-      freebsd*|darwin*)
-        if type gls > /dev/null 2>&1; then
-          cmd_ls='gls'
-        else
-          # -G : Enable colorized output.
-          opt_ls=('-aCFG')
-        fi
-        ;;
-    esac
-
-    local ls_result
-    ls_result=$(CLICOLOR_FORCE=1 COLUMNS=$COLUMNS command $cmd_ls ${opt_ls[@]} | sed $'/^\e\[[0-9;]*m$/d')
-
-    local ls_lines=$(echo "$ls_result" | wc -l | tr -d ' ')
-
-    if [ $ls_lines -gt 10 ]; then
-      echo "$ls_result" | head -n 5
-      echo '...'
-      echo "$ls_result" | tail -n 5
-      echo "$(command ls -1 -A | wc -l | tr -d ' ') files exist"
-    else
-      echo "$ls_result"
-    fi
-}
+# cdで移動後に省略lsを実行する(10行を超える内容の時lsの表示内容を前後10行だけに絞る)
+chpwd() { ls_abbrev }
 
 # -----------------------------
 # cdr の設定
