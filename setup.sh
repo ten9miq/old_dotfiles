@@ -26,7 +26,6 @@ fi
 \cp config/.zprofile ~/
 \cp config/.bashrc ~/
 \cp config/.zshrc ~/
-\cp config/.colorrc ~/
 \cp config/.vimrc ~/
 \cp config/.gvimrc ~/
 \cp config/.inputrc ~/
