@@ -470,35 +470,6 @@ setopt pushd_to_home
 chpwd() { ls_abbrev }
 
 # -----------------------------
-# cdr の設定
-# -----------------------------
-# cdrコマンドを有効 ログアウトしても有効なディレクトリ履歴
-autoload -Uz chpwd_recent_dirs cdr
-# cdr タブでリストを表示
-add-zsh-hook chpwd chpwd_recent_dirs
-# cdrコマンドで履歴にないディレクトリにも移動可能に
-zstyle ":chpwd:*" recent-dirs-default true
-zstyle ':completion:*' recent-dirs-insert both
-zstyle ':chpwd:*' recent-dirs-max 500
-zstyle ':chpwd:*' recent-dirs-pushd true
-
-# cdを移動を便利にするenhancdを追加
-# compinitのあとでないとcomdefのエラーを吐く
-if [ -f ~/.zsh/enhancd/init.sh ]; then
-  source ~/.zsh/enhancd/init.sh
-fi
-
-# fzf-cdr
-alias cdd='fzf-cdr'
-function fzf-cdr() {
-    target_dir=`cdr -l | sed 's/^[^ ][^ ]*  *//' | fzf`
-    target_dir=`echo ${target_dir/\~/$HOME}`
-    if [ -n "$target_dir" ]; then
-        cd $target_dir
-    fi
-}
-
-# -----------------------------
 # alias
 # -----------------------------
 # aliasの読み込み
