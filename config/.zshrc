@@ -468,6 +468,11 @@ setopt chase_dots
 setopt pushd_to_home
 # cdで移動後に省略lsを実行する(10行を超える内容の時lsの表示内容を前後10行だけに絞る)
 chpwd() { ls_abbrev }
+# cdを移動を便利にするenhancdを追加
+# compinitのあとでないとcomdefのエラーを吐く
+if [ -f ~/.zsh/enhancd/init.sh ]; then
+  source ~/.zsh/enhancd/init.sh
+fi
 
 # -----------------------------
 # alias
