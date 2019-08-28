@@ -77,7 +77,7 @@ fi
 # クライアントのLinuxの場合にssh-agentを共通で使う
 # https://www8281uo.sakura.ne.jp/blog/?p=617
 #---------------------------------------------------------------
-if [ -e "$HOME/.ssh" ];then
+if [ -d "$HOME/.ssh" ];then
   if [ -z "$SSH_CONNECTION" ]; then
     SSH_AGENT_FILE=$HOME/.ssh-agent
     [ -f $SSH_AGENT_FILE ] && source $SSH_AGENT_FILE
