@@ -49,12 +49,37 @@ if [ "${OS}" = 'Linux' ] ; then
   # \cp config/ssh_config ~/.ssh/config
 fi
 
+
+if [ ! -e "${HOME}/.gitconfig.local" ]; then
+  echo -n -e ".gitconfig.localがないので作成します。\n"
+
+    cat <<EOF > "${HOME}/.gitconfig.local"
+[user]
+    name = 53JIlLenWe11
+    email = ruin.of.messger@gmail.com
+[core]
+    autocrlf = input
+EOF
+
+  if [ "${OS}" == 'Linux' ] ; then
+    cat <<EOF >> "${HOME}/.gitconfig.local"
+[credential]
+    # 認証情報が一定の間だけlinuxのメモリーに記憶されます timeoutに設定された秒数の間だけ記憶する 
+    helper = cache --timeout=36000  # 36000=10時間 デフォは15分
+EOF
+
+  elif [ "${OS}" == 'Cygwin' ]; then
+    cat <<EOF >> "${HOME}/.gitconfig.local"
+[credential]
+    helper = wincred
+EOF
+
+  else
+    echo "Your platform ($(uname -a)) is not supported."
+  fi
+fi
+
 echo ' '
 echo '###############################################################################'
 echo '###                             COMPLITE.                                   ###'
 echo '###############################################################################'
-
-if [ ! -e "${HOME}/.gitconfig.local" ]; then
-  echo -n -e ".gitconfig.localがないので一度作成してください。\n.gitconfigに記載例が載っています。\n"
-  read -p " Enter to close:"
-fi
