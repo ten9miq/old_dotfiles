@@ -83,7 +83,8 @@ if [ -d "$HOME/.ssh" ];then
     [ -f $SSH_AGENT_FILE ] && source $SSH_AGENT_FILE
     ssh-add -l > /dev/null 2>&1
     if [ $? != 0 ]; then
-      ssh-agent > $SSH_AGENT_FILE
+      # >| を使うことでsetopt no_clobberでも上書きできる
+      ssh-agent >| $SSH_AGENT_FILE
       source $SSH_AGENT_FILE
       DIR="$HOME/.ssh/"
       for KEY in `find $DIR -name 'id_rsa*' -not -name '*.pub'`

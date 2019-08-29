@@ -27,7 +27,7 @@ setopt notify
 setopt print_eight_bit
 # 終了ステータスが0以外の場合にステータスを表示する
 setopt print_exit_value
-# 上書きリダイレクトの禁止
+# 上書きリダイレクトの禁止 echo foo > hoge ですでにhogeが存在する場合､書き込まないでエラーを吐く
 setopt no_clobber
 # 各コマンドが実行されるときにパスをハッシュに入れる
 #setopt hash_cmds
