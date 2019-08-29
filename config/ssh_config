@@ -1,0 +1,17 @@
+protocol 2
+ForwardAgent yes
+
+# サーバーへ定期的(今回は60秒毎)に生きている報告をする(全体的に記述を有効にする場合は先頭辺りに書いておくといい)
+ServerAliveInterval 60
+ServerAliveCountMax 3
+# Git bash上でのOpen_sshで Their offer: ssh-dss と言われる対策
+HostKeyAlgorithms +ssh-dss
+
+# コネクションを共有するための設定
+Host *
+#   hostname *
+#   ProxyCommand ssh hostname nc %h %p
+    PermitLocalCommand  yes
+    LocalCommand tmux rename-window %n
+    ControlMaster auto
+    ControlPath ~/.ssh/mux-%r@%h:%p
