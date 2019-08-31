@@ -32,7 +32,7 @@ fi
 \cp config/.gitconfig ~/
 
 # bashでgitの補完を有効にするためのshell script
-\cp -r .bash_source_sh/ ~/
+\cp -r .bash/ ~/
 # aliasなどzshとbashで共通できるもの
 \cp -r config/.read_conf/ ~/
 # dein.vimのPluginファイルのコピー

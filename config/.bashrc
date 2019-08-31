@@ -7,7 +7,7 @@ fi
 [ -f ~/.read_conf/.env ] && source ~/.read_conf/.env
 
 # bashでコマンド補完を有効にするためのshellの読み込み処理
-COMP_PATH=$HOME/.bash_source_sh/
+COMP_PATH=$HOME/.bash/
 for f in `\find ${COMP_PATH} -maxdepth 1 -type f `; do
   source $f
 done
