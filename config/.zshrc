@@ -315,7 +315,6 @@ setopt hist_save_no_dups
 # 関数の読み込み
 [ -f ~/.read_conf/functions ] && source ~/.read_conf/functions
 
-
 # -----------------------------
 # Completion
 # -----------------------------
@@ -339,8 +338,6 @@ setopt complete_in_word
 setopt correct
 # コマンドライン全てのスペルチェックをする
 setopt correct_all
-# コマンドが間違えている時の指摘時の表示を変更
-SPROMPT="correct: $RED%R$DEFAULT -> $GREEN%r$DEFAULT ? [No/yes/abort/edit] => "
 # 補完候補が複数ある時、一覧表示 (auto_list) せず、すぐに最初の候補を補完する
 setopt menu_complete # 強制で最初のが選択されるのが使いづらいので無効化
 # 補完候補をできるだけ詰めて表示する
@@ -363,13 +360,13 @@ setopt mark_dirs
 setopt interactive_comments
 # 明確なドットの指定なしで.から始まるファイルをマッチ
 setopt globdots
-# ファイル名の展開でディレクトリにマッチした場合 末尾に / を付加
-setopt mark_dirs
 # aliasを展開して補完を行う
 setopt no_complete_aliases
 # aliasが展開されていない状態で補完を行う
 # setopt complete_aliases
 
+# コマンドが間違えている時の指摘時の表示を変更
+SPROMPT="correct: $RED%R$DEFAULT -> $GREEN%r$DEFAULT ? [No/yes/abort/edit] => "
 
 # 補完キー連打で順に補完候補を自動で補完
 # select=2: 補完候補を一覧から選択する。
@@ -381,8 +378,6 @@ zstyle ':completion:*' menu select=2
 # キャッシュの利用による補完の高速化
 zstyle ':completion::complete:*' use-cache true
 #zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-#kill の候補にも色付き表示
-zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([%0-9]#)*=0=01;31'
 # 大文字・小文字を区別しない(大文字を入力した場合は区別する)
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 # manの補完をセクション番号別に表示させる
@@ -396,11 +391,6 @@ zstyle ':completion:*:descriptions' format $GREEN'completing %B%d%b'$DEFAULT
 zstyle ':completion:*:messages' format $LIGHTBLUE'%d'$DEFAULT
 zstyle ':completion:*:corrections' format $YELLOW'%B%d '$RED'(errors: %e)%b'$DEFAULT
 zstyle ':completion:*:warnings' format $RED'No matches for:'$YELLOW' %d'$DEFAULT
-# sudo の後ろでコマンド名を補完する
-zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
-                   /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin
-# ps コマンドのプロセス名補完
-zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 ## 補完方法毎にグループ化する。
 ### 補完方法の表示方法
 ###   %B...%b: 「...」を太字にする。
@@ -409,6 +399,14 @@ zstyle ':completion:*' format '%B%d%b'
 zstyle ':completion:*' group-name ''
 # cd ../の時に今いるディレクトリを補完候補から外す
 zstyle ':completion:*' ignore-parents parent pwd ..
+
+# sudo の後ろでコマンド名を補完する
+zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
+                   /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin
+# ps コマンドのプロセス名補完
+zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
+#kill の候補にも色付き表示
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([%0-9]#)*=0=01;31'
 
 # -----------------------------
 # KeyBind
