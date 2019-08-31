@@ -7,6 +7,8 @@
 # -----------------------------
 # General
 # -----------------------------
+# 起動時に自動実行されるスクリプト
+[ -f ~/.read_conf/startup] && source ~/.read_conf/startup
 # 共通環境変数のファイルの読み込み
 [ -f ~/.read_conf/env ] && source ~/.read_conf/env
 

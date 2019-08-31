@@ -58,60 +58,6 @@ function mkcd {
 }
 
 #---------------------------------------------------------------
-# SSHログイン時にtmuxを自動で開くようにする
-#---------------------------------------------------------------
-if which tmux >/dev/null 2>&1; then
-  #if not inside a tmux session, and if no session is started, start a new session
-  test -z "$TMUX" && (tmux attach || tmux new-session)
-fi
-
-#---------------------------------------------------------------
-# tmuxのhostごとにstatus lineの色を変える
-#---------------------------------------------------------------
-if ! [ "$TMUX" = "" ]; then
-    tmux set-option status-bg $(perl -MList::Util=sum -e'print+(red,green,blue,yellow,cyan,magenta,white)[sum(unpack"C*",shift)%7]' $(hostname)) | cat > /dev/null
-fi
-
-#---------------------------------------------------------------
-# SSH AGENT SETTINGS
-# クライアントのLinuxの場合にssh-agentを共通で使う
-# https://www8281uo.sakura.ne.jp/blog/?p=617
-#---------------------------------------------------------------
-if [ -d "$HOME/.ssh" ];then
-  if [ -z "$SSH_CONNECTION" ]; then
-    SSH_AGENT_FILE=$HOME/.ssh-agent
-    [ -f $SSH_AGENT_FILE ] && source $SSH_AGENT_FILE
-    ssh-add -l > /dev/null 2>&1
-    if [ $? != 0 ]; then
-      # >| を使うことでsetopt no_clobberでも上書きできる
-      ssh-agent >| $SSH_AGENT_FILE
-      source $SSH_AGENT_FILE
-      DIR="$HOME/.ssh/"
-      for KEY in `find $DIR -name 'id_rsa*' -not -name '*.pub'`
-      do
-        ssh-add $KEY
-      done
-    fi
-    unset SSH_AGENT_FILE
-    unset DIR
-    unset KEY
-  else
-    SSH_AGENT_LINK=$HOME/.ssh/agent
-    if [ -S $SSH_AUTH_SOCK ]; then
-      case $SSH_AUTH_SOCK in
-        /tmp/ssh-*/agent.[0-9]*)
-          ln -sf $SSH_AUTH_SOCK $SSH_AGENT_LINK;
-          ;;
-      esac
-    fi
-    if [ -S $SSH_AGENT_LINK ]; then
-      export SSH_AUTH_SOCK=$SSH_AGENT_LINK
-    fi
-    unset SSH_AGENT_LINK
-  fi
-fi
-
-#---------------------------------------------------------------
 # cd後にls実行時に10行より多い場合は、前後5行づつ表示する
 #---------------------------------------------------------------
 ls_abbrev(){
