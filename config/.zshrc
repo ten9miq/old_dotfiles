@@ -8,7 +8,7 @@
 # General
 # -----------------------------
 # 共通環境変数のファイルの読み込み
-[ -f ~/.read_conf/.env ] && source ~/.read_conf/.env
+[ -f ~/.read_conf/env ] && source ~/.read_conf/env
 
 # 色を使用
 autoload -Uz colors ; colors
@@ -311,7 +311,7 @@ setopt hist_save_no_dups
 # functions
 # -----------------------------
 # 関数の読み込み
-[ -f ~/.read_conf/.functions ] && source ~/.read_conf/.functions
+[ -f ~/.read_conf/functions ] && source ~/.read_conf/functions
 
 
 # -----------------------------
@@ -478,7 +478,7 @@ fi
 # alias
 # -----------------------------
 # aliasの読み込み
-[ -f ~/.read_conf/.alias ] && source ~/.read_conf/.alias
+[ -f ~/.read_conf/alias ] && source ~/.read_conf/alias
 
 # それぞれのaliasに対応
 # setopt no_complete_aliasesでalisaを展開したあととして補完が対応できるはずだが

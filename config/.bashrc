@@ -4,7 +4,7 @@ if [ -f /etc/bashrc ]; then
 fi
 
 # 共通環境変数のファイルの読み込み
-[ -f ~/.read_conf/.env ] && source ~/.read_conf/.env
+[ -f ~/.read_conf/env ] && source ~/.read_conf/env
 
 # bashでコマンド補完を有効にするためのshellの読み込み処理
 COMP_PATH=$HOME/.bash/
@@ -60,10 +60,10 @@ function parse_git_branch {
 shopt -s autocd
 
 # 共通aliasの読み込み
-[ -f ~/.read_conf/.alias ] && source ~/.read_conf/.alias
+[ -f ~/.read_conf/alias ] && source ~/.read_conf/alias
 
 # functionの共通関数の読み込み
-[ -f ~/.read_conf/.functions ] && source ~/.read_conf/.functions
+[ -f ~/.read_conf/functions ] && source ~/.read_conf/functions
 
 #---------------------------------------------------------------
 # cd autocd pushd popd でディレクトリ移動したら自動でlsコマンドを実行
