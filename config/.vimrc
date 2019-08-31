@@ -63,14 +63,14 @@ set fileformats=unix,dos,mac
 set shellslash
 " スワップファイルは使う(異常終了した場合にリカバリーできる)
 set swapfile
-set directory=$HOME/.vimSwap.
+set directory=$HOME/.vimSwap
 call s:make_dir(&directory)
 " バックアップディレクトリの指定(下の関数にてディレクトリがない場合には作成する)
-set backupdir=$HOME/.vimBackup.
+set backupdir=$HOME/.vimBackup
 " 設定したディレクトリを生成する & をつけてオプションの値を渡していることに注意
 call s:make_dir(&backupdir)
 " ファイルを閉じてもファイルを閉じる前の操作をUndoできるようになる
-set undodir=$HOME/.vimUndo.
+set undodir=$HOME/.vimUndo
 call s:make_dir(&undodir)
 set undofile
 " カーソルを移動する際に行頭、行末で止まらないようにする
