@@ -52,6 +52,19 @@ WORDCHARS=${WORDCHARS:s,/,,}
 [ -f ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] \
   && source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+# デフォルトだとmainのみだけなので、他のシンタックスハイライトを有効にする
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
+
+typeset -A ZSH_HIGHLIGHT_STYLES # Declare the variable
+ZSH_HIGHLIGHT_STYLES[globbing]='fg=027' # 青の色が見にくいので見やすい青に
+ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=027' # 青の色が見にくいので見やすい青に
+
+typeset -A ZSH_HIGHLIGHT_PATTERNS # Declare the variable
+ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=white,bold,bg=red') # 注意が必要なコマンドの背景色を赤色にする
+
+# 括弧のシンタックスハイライトの色を見やすい青系に
+ZSH_HIGHLIGHT_STYLES[bracket-level-1]='fg=027,bold'
+
 # コマンド入力中にサジェストを表示する
 [ -f ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ] \
   && source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -103,8 +116,8 @@ setopt transient_rprompt
 
 
 #PROMPT='%F{cyan}%n@%m%f:%~# '
-PROMPT="%F{245}[%{%D %*]%f${fg[cyan]}%} %~%{${reset_color}%}
-%F{200}%n%f%F{021}@%f%F{green}%m%f $ "
+PROMPT="%F{245}[%D %*]%f%F{039} %~ %f
+%F{200}%n%f%F{027}@%f%F{green}%m%f $ "
 
 autoload -Uz is-at-least
 autoload -Uz vcs_info
