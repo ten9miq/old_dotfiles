@@ -82,7 +82,7 @@ ZSH_HIGHLIGHT_STYLES[bracket-level-1]='fg=027,bold'
 # %#    ユーザ種別
 # %?    直前のコマンドの戻り値
 # %D    日付(yy-mm-dd)
-# %W    日付(yy/mm/dd)
+# %W    日付(mm/dd/yy)
 # %w    日付(day dd)
 # %*    時間(hh:flag_mm:ss)
 # %T    時間(hh:mm)
@@ -116,7 +116,7 @@ setopt transient_rprompt
 
 
 #PROMPT='%F{cyan}%n@%m%f:%~# '
-PROMPT="%F{245}[%D %*]%f%F{039} %~ %f
+PROMPT="%F{245}[%D{%y/%m/%d %H:%M:%S}]%f%F{039} %~ %f
 %F{200}%n%f%F{027}@%f%F{green}%m%f $ "
 
 autoload -Uz is-at-least
