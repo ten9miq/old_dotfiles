@@ -64,7 +64,8 @@ EOF
   if [ "${OS}" == 'Linux' ] ; then
     cat <<EOF >> "${HOME}/.gitconfig.local"
 [credential]
-    # 認証情報が一定の間だけlinuxのメモリーに記憶されます timeoutに設定された秒数の間だけ記憶する 
+#   helper = store # PWが平文で$HOME配下に保存されるので注意 cacheの方を推奨
+# 認証情報が一定の間だけlinuxのメモリーに記憶されます timeoutに設定された秒数の間だけ記憶する
     helper = cache --timeout=36000  # 36000=10時間 デフォは15分
 EOF
 
