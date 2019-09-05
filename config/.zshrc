@@ -18,6 +18,8 @@ autoload -Uz add-zsh-hook
 
 # Ctrl+Dでログアウトしてしまうことを防ぐ
 #setopt IGNOREEOF
+# Ctrl+S/Ctrl+Q によるフロー制御を使わないようにする
+setopt no_flow_control
 
 # ビープ音を鳴らさないようにする
 setopt no_beep
