@@ -40,17 +40,17 @@ alias sdc="sudo docker-compose"
 # List containers  old:docker ps
 alias dl="docker container ls"
 # List containers including stopped containers
-alias da="docker container ls --all"
+alias dla="docker container ls --all"
 # Get the latest container ID  old:docker ps --latest --quiet
 alias dlate="dl --latest --quiet"
 
 ### docker image
 # List images  old:docker ps
-alias dil="docker image ls"
+alias di="docker image ls"
 # List images including intermediates
 alias dia="docker image ls --all"
 # Get the latest image ID
-alias dilate="dil | head -n 2 | tail -n 1 | awk '{print \$3}'"
+alias dilate="di | head -n 2 | tail -n 1 | awk '{print \$3}'"
 
 # Get an IPaddress of a container
 alias dip="docker container inspect --format '{{ .NetworkSettings.IPAddress }}'"
@@ -77,7 +77,8 @@ alias drma='docker container rm $(da --quiet)'
 # Remove all images  old:docker rmi $(docker images --quiet)
 alias dirma='docker image rm $(dia --quiet)'
 # Remove all containers and images by force
-alias dclean='docker container kill $(da --quiet); drma; dirma;'
+alias dclean='docker container stop $(da --quiet); docker container kill $(da --quiet); drma; dirma;'
+# or docker system prune
 
 # docker image to dockerfile
 alias dih="docker_image_history"
