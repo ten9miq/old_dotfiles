@@ -20,6 +20,9 @@ autoload -Uz add-zsh-hook
 #setopt IGNOREEOF
 # Ctrl+S/Ctrl+Q によるフロー制御を使わないようにする
 setopt no_flow_control
+# zsh 5.0.2では下記を記載しないと無効にできない
+stty stop undef
+stty start undef
 
 # ビープ音を鳴らさないようにする
 setopt no_beep
