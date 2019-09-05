@@ -3,10 +3,10 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
-# 起動時に自動実行されるスクリプト
-[ -f ~/.read_conf/startup ] && source ~/.read_conf/startup
 # 共通環境変数のファイルの読み込み
 [ -f ~/.read_conf/env ] && source ~/.read_conf/env
+# 起動時に自動実行されるスクリプト
+[ -f ~/.read_conf/startup ] && source ~/.read_conf/startup
 
 # bashでコマンド補完を有効にするためのshellの読み込み処理
 COMP_PATH=$HOME/.bash/
