@@ -156,7 +156,7 @@ set showbreak=↪
 " Tab、行末の半角スペースを明示的に表示する。
 set list
 " タブや行末スペースをどの記号で表示するかを設定する
-set listchars=tab:^\ ,trail:·,extends:»,precedes:«,nbsp:⊔
+set listchars=tab:^\ ,trail:⋅,extends:»,precedes:«,nbsp:⊔
 " itchyny/lightline.vimの色スキーマを変更
 let g:lightline = {
       \ 'colorscheme': 'wombat',
@@ -182,8 +182,10 @@ set softtabstop=2
 set autoindent
 "改行時に入力された行の末尾に合わせて次の行のインデントを増減する
 set smartindent
-" □や○文字などの全角記号が崩れる問題を解決
-set ambiwidth=double
+" listchars or fillcharsに□や○文字などの全角記号が崩れる問題を解決
+if exists('&ambiwidth')
+    set ambiwidth=double " UTF-8の□や○でカーソル位置がずれないようにする
+endif
 
 " 検索系
 " 検索文字列が小文字の場合は大文字小文字を区別なく検索する
