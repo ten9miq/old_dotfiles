@@ -156,7 +156,7 @@ set showbreak=↪
 " Tab、行末の半角スペースを明示的に表示する。
 set list
 " タブや行末スペースをどの記号で表示するかを設定する
-set listchars=tab:^\ ,trail:␣,extends:»,precedes:«,nbsp:⊔
+set listchars=tab:^\ ,trail:·,extends:»,precedes:«,nbsp:⊔
 " itchyny/lightline.vimの色スキーマを変更
 let g:lightline = {
       \ 'colorscheme': 'wombat',
