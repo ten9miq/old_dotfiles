@@ -77,8 +77,10 @@ repo = 'greymd/oscyank.vim' # 1行100文字を974行(97267文字)コピーする
 repo = 'kien/rainbow_parentheses.vim'
 
 # 閉じ括弧,閉じクォートを補完
-[[plugins]]
-repo = 'cohama/lexima.vim'
+# vim 7.4で最新を入れるとインサートモード移行時にエラーがでるので
+# .vimrcでインストールバージョン切り替える設定込みでそっちで定義する
+#[[plugins]]
+#repo = 'cohama/lexima.vim'
 
 # deinの管理するプラグインの更新状況をUIで表示するプラグイン
 # :DeinUpdate コマンドでプラグインの一括更新

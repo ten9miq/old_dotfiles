@@ -9,6 +9,7 @@ if &runtimepath !~# '/dein.vim'
   if !isdirectory(s:dein_path)
     call system('git clone https://github.com/Shougo/dein.vim ' . s:dein_path)
     if v:version == 704
+      " vim 7.4では1.5のdeinでないと動作しないので切り替え処理を行う
       call system('cd '. s:dein_path . ' && git checkout -b 1.5 1.5')
     endif
   endif
@@ -23,6 +24,11 @@ if dein#load_state(s:dein_dir)
   " dein Do not manage dein at Vim 7.4, as it is not HEAD
   if v:version != 704
     call dein#add('Shougo/dein.vim')
+    call dein#add('cohama/lexima.vim')
+  else
+    " vim 7.4だとインサートモード移行時にエラーがでるので
+    " 以前のバージョンを指定することで回避する
+    call dein#add('cohama/lexima.vim', { 'rev': 'aef88ca' })
   endif
 
   " プラグインリストを収めた TOML ファイル
