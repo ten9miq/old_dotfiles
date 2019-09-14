@@ -7,7 +7,10 @@ let s:dein_dir = expand('~/.vim/dein')
 if &runtimepath !~# '/dein.vim'
   let s:dein_path = expand('~/.vim/dein/repos/github.com/Shougo/dein.vim')
   if !isdirectory(s:dein_path)
-    silent! execute '!git clone https://github.com/Shougo/dein.vim' s:dein_path
+    call system('git clone https://github.com/Shougo/dein.vim ' . s:dein_path)
+    if v:version == 704
+      call system('cd '. s:dein_path . ' && git checkout -b 1.5 1.5')
+    endif
   endif
   set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
 endif
@@ -16,6 +19,11 @@ endif
 " 設定開始
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
+
+  " dein Do not manage dein at Vim 7.4, as it is not HEAD
+  if v:version != 704
+    call dein#add('Shougo/dein.vim')
+  endif
 
   " プラグインリストを収めた TOML ファイル
   " 予め TOML ファイル（後述）を用意しておく

@@ -1,7 +1,3 @@
-# 基本は github.com のレポジトリを指定するだけ
-[[plugins]]
-repo = 'Shougo/dein.vim'
-
 # git clone 後、実行すべきコマンドがある場合はこんな感じ
 [[plugins]]
 repo = 'Shougo/vimproc.vim'
