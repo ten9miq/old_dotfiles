@@ -10,8 +10,6 @@ alias sudo='sudo '
 alias sv='sudo_vim'
 alias svi='sudo_vim'
 alias hg='history | grep'
-alias le='less'
-alias lef='less +F'
 alias g='git'
 alias sg="sudo_git"
 
@@ -22,6 +20,15 @@ sudo_git(){
 alias ...='cd ../..'
 alias ....='cd ../../..'
 
+if type smartless > /dev/null 2>&1; then
+  # コマンドが存在すれば
+  alias le='smartless'
+  alias lef='smartless +F'
+else
+  # コマンドが存在しなければ
+  alias le='less'
+  alias lef='less +F'
+fi
 #---------------------------------------------------------------
 # sudo.vim プラグインのエイリアス
 #---------------------------------------------------------------
