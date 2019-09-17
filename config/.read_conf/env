@@ -19,6 +19,23 @@ if [[ ! "$PATH" == *$HOME/bin/.fzf/bin* ]]; then
 fi
 
 #---------------------------------------------------------------
+# lessの設定
+#---------------------------------------------------------------
+# less起動時のデフォルト設定を記載
+# --no-init lessを閉じたときに表示内容を消さない
+# --quit-if-one-screen 表示内容が1ページの時cat的な動作をする
+export LESS='--LINE-NUMBERS --ignore-case --LONG-PROMPT --RAW-CONTROL-CHARS --HILITE-UNREAD --window=4 --tabs=4 --quit-if-one-screen'
+export PAGER='less --line-numbers' # manなどのページャーとしてlessを使用する $LESSが有効 行番号は非表示
+#less上での色 色 0黒,1赤,2緑,3黄色,4青,5ピンク,6水色,7白
+export LESS_TERMCAP_mb=$(tput bold)                # begin blinking
+export LESS_TERMCAP_md=$(tput bold; tput setaf 2)  # begin bold (green)
+export LESS_TERMCAP_me=$(tput sgr0)                # end mode
+export LESS_TERMCAP_se=$(tput sgr0)                # end standout-mode
+export LESS_TERMCAP_so=$(tput rev; tput setaf 3)  # begin standout-mode (yellow)
+export LESS_TERMCAP_ue=$(tput rmul; tput sgr0)     # end underline
+export LESS_TERMCAP_us=$(tput smul; tput setaf 1)  # begin underline (cyan)
+
+#---------------------------------------------------------------
 # NVM (nodejsのため)
 # nvmインストール方法
 # curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash

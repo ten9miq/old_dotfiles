@@ -10,7 +10,8 @@ alias sudo='sudo '
 alias sv='sudo_vim'
 alias svi='sudo_vim'
 alias hg='history | grep'
-alias lessf='less -N+F'
+alias le='less'
+alias lef='less +F'
 alias g='git'
 alias sg="sudo_git"
 
