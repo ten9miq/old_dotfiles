@@ -40,7 +40,7 @@ fi
 # zshのファイルをコピー
 \cp -r .zsh ~/
 # 自身の独自コマンド実行ファイルをコピー
-\cp -r bin ~/
+\cp -rp bin ~/
 
 if [ "${OS}" = 'Linux' ] ; then
   echo "OS Linux!!"
