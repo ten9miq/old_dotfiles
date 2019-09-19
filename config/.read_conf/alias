@@ -19,6 +19,7 @@ sudo_git(){
 
 alias ...='cd ../..'
 alias ....='cd ../../..'
+alias sle='sudo less -SsNiMRW -z4 -x4 -#15' # 折返しなしを追加したlessパラメータ
 
 if type smartless > /dev/null 2>&1; then
   # コマンドが存在すれば
