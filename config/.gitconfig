@@ -28,7 +28,12 @@
   grep = auto
 
 [push]
-  default = tracking
+  # https://qiita.com/awakia/items/6aaea1ffecba725be601
+  default = current # 現在のブランチをリモートに同名でpushする。例えupstreamを設定していなくてもpushされる
+
+[branch]
+  # 派生元ブランチにリモートブランチが指定されていても追跡ブランチに設定されなくなる
+  autosetupmerge = false
 
 [alias]
   a = add
@@ -37,6 +42,7 @@
   ba = branch -a           # originも含めた全てのbranchを表示
   bm = branch --merged     # merge済みのbranchを表示
   bn = branch --no-merged  # mergeしてないbranchを表示
+  bv = branch -vv # ブランチ名 コミット番号 [追跡ブランチ名] コミットメッセージの表示
   c = commit
   cm = commit -m
   r = reset
