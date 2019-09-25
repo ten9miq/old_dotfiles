@@ -50,6 +50,7 @@
   ft = fetch
   pl = pull
   ps = push
+  rm = remote
 
   df = diff
   dc = diff --cached          # addされているものとのdiff
