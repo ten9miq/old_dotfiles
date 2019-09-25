@@ -31,8 +31,8 @@
   default = tracking
 
 [alias]
-  ad = add
-  ada = add -A
+  a = add
+  aa = add -A
   b = branch
   ba = branch -a           # originも含めた全てのbranchを表示
   bm = branch --merged     # merge済みのbranchを表示
@@ -53,7 +53,7 @@
 
   df = diff
   dc = diff --cached          # addされているものとのdiff
-  ds = diff --staged          # 同上(1.6.1移行)
+  ds = diff --staged          # 同上(ver1.6.1以降)
   d = diff HEAD               # HEADとdiff
   d1 = diff HEAD~             # HEADから1つ前とdiff
   d2 = diff HEAD~~            # HEADから2つ前とdiff
