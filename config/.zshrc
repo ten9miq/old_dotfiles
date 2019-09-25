@@ -333,6 +333,24 @@ setopt hist_save_no_dups
 # 関数の読み込み
 [ -f ~/.read_conf/functions ] && source ~/.read_conf/functions
 
+# 補完ファイルの再読み込みプラグインの読み込み
+if [ -d ~/.zsh/zload/ ]; then
+  fpath=(~/.zsh/zload(N-/) $fpath)
+  autoload -Uz zload
+  # zsh-completion-generatorとの組み合わせで位置コマンドで生成する
+  gcomp(){
+    gencomp $@
+    zload $GENCOMPL_FPATH/_*
+  }
+
+  gcomp_all(){
+    for p in $path; do command -p ls $p; done |\
+        uniq |\
+        { while read c; do gencomp $c; done }
+    zload $GENCOMPL_FPATH/_*
+  }
+fi
+
 # -----------------------------
 # Completion
 # -----------------------------
@@ -343,6 +361,12 @@ fi
 if [ -e ~/.zsh/zsh-completions/src ]; then
   fpath=(~/.zsh/zsh-completions/src $fpath)
 fi
+# getoptスタイルのヘルプテキストから補完関数を自動的に生成するプラグイン
+if [ -f ~/.zsh/zsh-completion-generator/zsh-completion-generator.plugin.zsh ]; then
+  export GENCOMPL_FPATH=$HOME/.zsh/zsh-completion-generator/generation_completion/ # 生成先
+  source ~/.zsh/zsh-completion-generator/zsh-completion-generator.plugin.zsh
+fi
+
 # fzfのAuto-completion
 [[ $- == *i* ]] && source "$HOME/bin/.fzf/shell/completion.zsh" 2> /dev/null
 
