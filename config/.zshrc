@@ -337,7 +337,7 @@ setopt hist_save_no_dups
 if [ -d ~/.zsh/zload/ ]; then
   fpath=(~/.zsh/zload(N-/) $fpath)
   autoload -Uz zload
-  # zsh-completion-generatorとの組み合わせで位置コマンドで生成する
+  # zsh-completion-generatorとzloadの組み合わせで1コマンドで補完を生成し読み込む
   gcomp(){
     gencomp $@
     zload $GENCOMPL_FPATH/_*
