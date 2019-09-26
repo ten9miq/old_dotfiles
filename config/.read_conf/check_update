@@ -19,7 +19,7 @@ else
 
   if [ "${OS}" = 'Linux' ] ; then
     # Linuxの場合~/dotfile/の更新がないかチェックし、更新あればgit pullしてsetup.shを実行する
-    \cd dotfiles
+    \cd $HOME/dotfiles
     git fetch -p
     git checkout -q master
     latest_rev=$(git ls-remote origin HEAD | awk '{print $1}')
