@@ -1,0 +1,47 @@
+#compdef ansible
+
+# zsh completions for 'ansible'
+# automatically generated with http://github.com/RobSis/zsh-completion-generator
+local arguments
+
+arguments=(
+  {-a,--args}'[module arguments]'
+  '--ask-vault-pass[ask for vault password]'
+  {-B,--background}'[run asynchronously, failing after X seconds]'
+  {-C,--check}'[dont make any changes; instead, try to predict some]'
+  {-D,--diff}'[when changing (small) files and templates, show the]'
+  {-e,--extra-vars}'[set additional variables as key=value or YAML/JSON, if]'
+  {-f,--forks}'[specify number of parallel processes to use]'
+  {-h,--help}'[show this help message and exit]'
+  {-i,--inventory,--inventory-file}'[specify inventory host path or comma separated host]'
+  {-l,--limit}'[further limit selected hosts to an additional pattern]'
+  '--list-hosts[outputs a list of matching hosts; does not execute]'
+  {-m,--module-name}'[module name to execute (default=command)]'
+  {-M,--module-path}'[prepend colon-separated path(s) to module library (def]'
+  {-o,--one-line}'[condense output]'
+  '--playbook-dir[since this tool does not use playbooks, use this as a]'
+  {-P,--poll}'[set the poll interval if using -B (default=15)]'
+  '--syntax-check[perform a syntax check on the playbook, but do not]'
+  {-t,--tree}'[log output to this directory]'
+  '--vault-id[the vault identity to use]'
+  '--vault-password-file[vault password file]'
+  {-v,--verbose}'[verbose mode (-vvv for more, -vvvv to enable]'
+  '--version[show programs version number, config file location]'
+  {-b,--become}'[run operations with become (does not imply password]'
+  '--become-method[privilege escalation method to use (default=sudo), use]'
+  '--become-user[run operations as this user (default=root)]'
+  {-K,--ask-become-pass}'[ask for privilege escalation password]'
+  {-k,--ask-pass}'[ask for connection password]'
+  {--private-key,--key-file}'[use this file to authenticate the connection]'
+  {-u,--user}'[connect as this user (default=None)]'
+  {-c,--connection}'[connection type to use (default=smart)]'
+  {-T,--timeout}'[override the connection timeout in seconds]'
+  '--ssh-common-args[specify common arguments to pass to sftp/scp/ssh (e.g.]'
+  '--sftp-extra-args[specify extra arguments to pass to sftp only (e.g. -f]'
+  '-l[)]'
+  '--scp-extra-args[specify extra arguments to pass to scp only (e.g. -l)]'
+  '--ssh-extra-args[specify extra arguments to pass to ssh only (e.g. -R)]'
+  '*:filename:_files'
+)
+
+_arguments -s $arguments

@@ -516,6 +516,21 @@ if [ -f ~/.zsh/enhancd/init.sh ]; then
   source ~/.zsh/enhancd/init.sh
 fi
 
+# 現在のディレクトリがgitリポジトリの時そのディレクトリのrootへ移動する
+if [ -d ~/.zsh/cd-gitroot/ ]; then
+  fpath=(~/.zsh/cd-gitroot(N-/) $fpath)
+  autoload -Uz cd-gitroot
+  alias cdu='cd-gitroot'
+fi
+
+# -----------------------------
+# プラグインによる機能追加
+# -----------------------------
+# gomiコマンドでゴミ箱に移動するプラグイン
+if [ -f ~/.zsh/zsh-gomi/gomi.zsh ]; then
+  source ~/.zsh/zsh-gomi/gomi.zsh
+fi
+
 # -----------------------------
 # alias
 # -----------------------------
