@@ -24,7 +24,7 @@ alias sle='sudo less -SsNiMRW -z4 -x4 -#15' # 折返しなしを追加したless
 if type smartless > /dev/null 2>&1; then
   # コマンドが存在すれば
   alias le='smartless'
-  alias lef='smartless +F'
+  alias lef='less +F'
 else
   # コマンドが存在しなければ
   alias le='less'
