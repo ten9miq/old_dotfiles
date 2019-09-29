@@ -21,7 +21,13 @@ fi
 # which python to use
 local python
 if [[ -z $GENCOMPL_PY ]]; then
+  if which python >/dev/null 2>&1; then
     python=python
+  elif which python3 >/dev/null 2>&1;  then
+    python=python3
+  else
+    exit 1;
+  fi
 else
     python=$GENCOMPL_PY
 fi
