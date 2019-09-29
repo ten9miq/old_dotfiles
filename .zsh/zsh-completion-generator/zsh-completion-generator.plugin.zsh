@@ -21,13 +21,13 @@ fi
 # which python to use
 local python
 if [[ -z $GENCOMPL_PY ]]; then
-  if which python >/dev/null 2>&1; then
-    python=python
-  elif which python3 >/dev/null 2>&1;  then
-    python=python3
-  else
-    exit 1;
-  fi
+    if which python >/dev/null 2>&1; then
+        python=python
+    elif which python3 >/dev/null 2>&1;  then
+        python=python3
+    else
+        echo "no install python, zsh-completion-generator need to python."
+    fi
 else
     python=$GENCOMPL_PY
 fi
@@ -41,32 +41,34 @@ zstyle -a :plugin:zsh-completion-generator programs programs
 
 # anonymous function, to have private variable scope
 () {
-local prg name help code
-local -a i
-for prg in "${programs[@]}"; do
-    name=$prg
-    help=--help
-    # Use "% *" trick to skip using regex
-    if [[ ${prg% *} != $prg ]]; then
-        i=( "${(@s/ /)prg}" )
-        name=$i[1]
-        if [[ -n "$i[2]" ]]; then
-            help="$i[2]"
-        fi
-    fi
+    if [[ ! -z $python ]]; then
+        local prg name help code
+        local -a i
+        for prg in "${programs[@]}"; do
+            name=$prg
+            help=--help
+            # Use "% *" trick to skip using regex
+            if [[ ${prg% *} != $prg ]]; then
+                i=( "${(@s/ /)prg}" )
+                name=$i[1]
+                if [[ -n "$i[2]" ]]; then
+                    help="$i[2]"
+                fi
+            fi
 
-    test -f $ZSH_COMPLETION_GENERATOR_DIR/_$name ||\
-        $name $help 2>&1 | $python $ZSH_COMPLETION_GENERATOR_SRCDIR/help2comp.py $name >!\
-            $ZSH_COMPLETION_GENERATOR_DIR/_$name || {
-                    code="${pipestatus[1]}"
-                    command rm -f $ZSH_COMPLETION_GENERATOR_DIR/_$name
-                    # Store error message into "err_$name", once
-                    [[ ! -f $ZSH_COMPLETION_GENERATOR_DIR/err_$name ]] &&\
-                        echo "No options found for $name. Was fetching from following invocation:" \
-                             "\`$name $help'.\nProgram reacted with exit code: $code." >!\
-                                    $ZSH_COMPLETION_GENERATOR_DIR/err_$name
-                }
-done
+            test -f $ZSH_COMPLETION_GENERATOR_DIR/_$name ||\
+                $name $help 2>&1 | $python $ZSH_COMPLETION_GENERATOR_SRCDIR/help2comp.py $name >!\
+                    $ZSH_COMPLETION_GENERATOR_DIR/_$name || {
+                            code="${pipestatus[1]}"
+                            command rm -f $ZSH_COMPLETION_GENERATOR_DIR/_$name
+                            # Store error message into "err_$name", once
+                            [[ ! -f $ZSH_COMPLETION_GENERATOR_DIR/err_$name ]] &&\
+                                echo "No options found for $name. Was fetching from following invocation:" \
+                                    "\`$name $help'.\nProgram reacted with exit code: $code." >!\
+                                            $ZSH_COMPLETION_GENERATOR_DIR/err_$name
+                        }
+        done
+    fi
 }
 
 # b) or use function in shell:
