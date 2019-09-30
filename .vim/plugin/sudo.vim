@@ -45,7 +45,7 @@ function! SudoRead(url)
 	endif
 	:0,$d
 	call setline(1,"foo")		
-	exec '1read !sudo cat "'.file.'" '
+	exec '1read !sudo cat "'.file.'" 2>/dev/null'
 	:1d
 	set nomod
 	:filetype detect
