@@ -51,10 +51,6 @@ repo = 't9md/vim-textmanip'
 repo = 'nathanaelkane/vim-indent-guides' # インデント範囲の色を変えるVer
 # repo = 'Yggdroot/indentLine' # インデントの右端に縦線
 
-# sudo vim のときの不具合をvim sudo:fileNameで解決してくれる
-[[plugins]]
-repo = 'vim-scripts/sudo.vim'
-
 # sのあとに2文字入力でその場所に移動できる
 [[plugins]]
 repo = 'justinmk/vim-sneak'
