@@ -5,7 +5,7 @@ ForwardAgent yes
 ServerAliveInterval 60
 ServerAliveCountMax 3
 # Git bash上でのOpen_sshで Their offer: ssh-dss と言われる対策
-# HostKeyAlgorithms +ssh-dss
+HostKeyAlgorithms +ssh-dss
 
 # コネクションを共有するための設定
 Host *
