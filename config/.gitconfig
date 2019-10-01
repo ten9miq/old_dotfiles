@@ -52,7 +52,7 @@
   sh = show
   ss = stash
   st = status
-  cl = clone
+  cl = clone --recursive  # cloneの時､同時にsubmoduleもクローンしてくる
   ft = fetch
   pl = pull
   ps = push
