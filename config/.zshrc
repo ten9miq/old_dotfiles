@@ -349,6 +349,15 @@ if [ -d ~/.zsh/zload/ ]; then
         { while read c; do gencomp $c; done }
     zload $GENCOMPL_FPATH/_*
   }
+
+  # タブ補完時に候補がないときに自動でgcompを実行して補完ファイルを生成する
+  function joeyComplete {
+    read -c COMMAND ARGS
+    if [ "$ARGS" ]; then
+      gcomp $COMMAND
+    fi
+  }
+  compctl -f -c -u -r -K joeyComplete -H 0 '' "*" -tn
 fi
 
 # -----------------------------
