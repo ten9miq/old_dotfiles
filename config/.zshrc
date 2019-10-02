@@ -353,8 +353,10 @@ if [ -d ~/.zsh/zload/ ]; then
   # タブ補完時に候補がないときに自動でgcompを実行して補完ファイルを生成する
   function joeyComplete {
     read -c COMMAND ARGS
-    if [ "$ARGS" ]; then
-      gcomp $COMMAND
+    if [ ! -n "`declare -f -F $COMMAND`" ]; then
+      if [ "$ARGS" ]; then
+        gcomp $COMMAND
+      fi
     fi
   }
   compctl -f -c -u -r -K joeyComplete -H 0 '' "*" -tn
