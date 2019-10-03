@@ -120,9 +120,8 @@ setopt prompt_subst
 setopt transient_rprompt
 
 
-#PROMPT='%F{cyan}%n@%m%f:%~# '
-PROMPT="%F{245}[%D{%y/%m/%d %H:%M:%S}]%f%F{039} %~ %f
-%F{170}%n%f%F{027}@%f%F{green}%m%f $ "
+PROMPT="%F{170}%n%f%F{027}@%f%F{green}%3m%f%F{039} %~ %f
+%F{099}[${SHLVL}]%f%F{245}[%D{%y/%m/%d %H:%M:%S}]%f $ "
 
 autoload -Uz is-at-least
 autoload -Uz vcs_info

@@ -47,16 +47,15 @@ LIGHT_CYAN='\[\e[96;40m\]'
 WHITE='\[\e[97;40m\]'
 RESET='\[\e[0m\]'
 
+# 引数に256色のXterm Numberを与えることでその色になります
+EXT_COLOR () { echo -ne "\[\033[38;5;$1m\]";  }
+
 # Based Bash Profile Generator
 # http://xta.github.io/HalloweenBash/
 # 16color
-# export PS1="$DARK_GLAY[\D{%Y/%m/%d} \t] $LIGHT_PURPLE\u$LIGHT_BLUE@$GREEN\H\n$RESET $CYAN\w $LIGHT_GLAY\$(parse_git_branch) $LIGHT_BLUE\$ $RESET"
-# export PS1="$DARK_GLAY[\D{%y/%m/%d} \t] $LIGHT_PURPLE\u$LIGHT_BLUE@$GREEN\H\n$RESET $CYAN\w $LIGHT_GLAY\$(__git_ps1 '(%s)') $LIGHT_BLUE\$ $RESET"
-export PS1="$DARK_GLAY[\D{%y/%m/%d} \t]$RESET $CYAN\w$LIGHT_GLAY\$(__git_ps1 ' (%s)') "$'\n'"$LIGHT_PURPLE\u$LIGHT_BLUE@$GREEN\h $LIGHT_BLUE\$ $RESET"
+# export PS1="$DARK_GLAY[\D{%y/%m/%d} \t]$RESET $CYAN\w$LIGHT_GLAY\$(__git_ps1 ' (%s)') "$'\n'"$LIGHT_PURPLE\u$LIGHT_BLUE@$GREEN\h $LIGHT_BLUE\$ $RESET"
+export PS1="$PURPLE\u$LIGHT_BLUE@$GREEN${HOSTNAME%.*.*.*} `EXT_COLOR 39`\w$LIGHT_GLAY\$(__git_ps1 ' (%s)') "$'\n'"`EXT_COLOR 99`[${SHLVL}]$DARK_GLAY[\D{%y/%m/%d} \t]$RESET $LIGHT_BLUE\$ $RESET"
 
-function parse_git_branch {
-  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
-}
 
 # cd省略してのディレクトリ移動を行う
 shopt -s autocd
