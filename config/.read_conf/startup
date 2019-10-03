@@ -36,7 +36,7 @@ if [ -d "$HOME/.ssh" ];then
   if [ -z "$SSH_CONNECTION" ]; then
     SSH_AGENT_FILE=$HOME/.ssh-agent
     [ -f $SSH_AGENT_FILE ] && source $SSH_AGENT_FILE
-    ssh-add -l > /dev/null 2>&1
+    ssh-add -l > /dev/null
     if [ $? != 0 ]; then
       # >| を使うことでsetopt no_clobberでも上書きできる
       ssh-agent >| $SSH_AGENT_FILE
