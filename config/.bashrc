@@ -50,11 +50,12 @@ RESET='\[\e[0m\]'
 # 引数に256色のXterm Numberを与えることでその色になります
 EXT_COLOR () { echo -ne "\[\033[38;5;$1m\]";  }
 
+# ホスト名をドット区切りで3つ目までを取り出す
+hostname_head3() { echo $HOSTNAME | sed -r 's@(([^\.]*)(\.[^\.]*){1,2}).*$@\1@'; }
 # Based Bash Profile Generator
 # http://xta.github.io/HalloweenBash/
 # 16color
-# export PS1="$DARK_GLAY[\D{%y/%m/%d} \t]$RESET $CYAN\w$LIGHT_GLAY\$(__git_ps1 ' (%s)') "$'\n'"$LIGHT_PURPLE\u$LIGHT_BLUE@$GREEN\h $LIGHT_BLUE\$ $RESET"
-export PS1="$PURPLE\u$LIGHT_BLUE@$GREEN${HOSTNAME%.*.*.*} `EXT_COLOR 39`\w$LIGHT_GLAY\$(__git_ps1 ' (%s)') "$'\n'"`EXT_COLOR 99`[${SHLVL}]$DARK_GLAY[\D{%y/%m/%d} \t]$RESET $LIGHT_BLUE\$ $RESET"
+export PS1="$PURPLE\u$LIGHT_BLUE@$GREEN`hostname_head3` `EXT_COLOR 39`\w$LIGHT_GLAY\$(__git_ps1 ' (%s)') "$'\n'"`EXT_COLOR 99`[${SHLVL}]$DARK_GLAY[\D{%y/%m/%d} \t]$RESET $LIGHT_BLUE\$ $RESET"
 
 
 # cd省略してのディレクトリ移動を行う
