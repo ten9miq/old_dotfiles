@@ -42,11 +42,14 @@ fi
 # 自身の独自コマンド実行ファイルをコピー
 \cp -rp bin ~/
 
-if [ "${OS}" = 'Linux' ] ; then
+if [ "${OS}" = 'Linux' ]; then
   echo "OS Linux!!"
   \cp config/.tmux.conf ~/.tmux.conf
   # \cp config/.gitignore ~/
   # \cp config/ssh_config ~/.ssh/config
+  if [ type fish &>/dev/null ]; then
+    \cp -r .config/ ~/
+  fi
 fi
 
 
