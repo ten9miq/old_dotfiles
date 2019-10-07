@@ -32,23 +32,26 @@ fi
 # クライアントのLinuxの場合にssh-agentを共通で使う
 # https://www8281uo.sakura.ne.jp/blog/?p=617
 #---------------------------------------------------------------
-if [ -d "$HOME/.ssh" ];then
+SSH_DIR="$HOME/.ssh/"
+if [ -d $SSH_DIR ];then
+  # SSHで接続していないならssh-agent実行処理を行う
   if [ -z "$SSH_CONNECTION" ]; then
-    SSH_AGENT_FILE=$HOME/.ssh-agent
-    [ -f $SSH_AGENT_FILE ] && source $SSH_AGENT_FILE
-    ssh-add -l > /dev/null
-    if [ $? != 0 ]; then
-      # >| を使うことでsetopt no_clobberでも上書きできる
-      ssh-agent >| $SSH_AGENT_FILE
-      source $SSH_AGENT_FILE
-      DIR="$HOME/.ssh/"
-      for KEY in `find $DIR -name 'id_rsa*' -not -name '*.pub'`
-      do
-        ssh-add $KEY
-      done
+    # 秘密鍵が1つ以上あるかチェック
+    if [ $(find $SSH_DIR -name 'id_rsa*' -not -name '*.pub' | wc -l) -gt 0 ];then
+      SSH_AGENT_FILE=$HOME/.ssh-agent
+      [ -f $SSH_AGENT_FILE ] && source $SSH_AGENT_FILE
+      ssh-add -l > /dev/null
+      if [ $? != 0 ]; then
+        # >| を使うことでsetopt no_clobberでも上書きできる
+        ssh-agent >| $SSH_AGENT_FILE
+        source $SSH_AGENT_FILE
+        for KEY in `find $SSH_DIR -name 'id_rsa*' -not -name '*.pub'`
+        do
+          ssh-add $KEY
+        done
+      fi
     fi
     unset SSH_AGENT_FILE
-    unset DIR
     unset KEY
   else
     SSH_AGENT_LINK=$HOME/.ssh/agent
@@ -65,4 +68,5 @@ if [ -d "$HOME/.ssh" ];then
     unset SSH_AGENT_LINK
   fi
 fi
+unset SSH_DIR
 
