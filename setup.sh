@@ -12,5 +12,5 @@ echo $PROJECT_PATH
 source $PROJECT_PATH/bash/init.sh
 
 
-echo '###     COMPLITE.                                                          ###'
+echo '###     COMPLITE.                                                           ###'
 echo '###############################################################################'
