@@ -1,3 +1,6 @@
+# zshの起動処理の速度調査の実行
+# zmodload zsh/zprof && zprof
+
 # -----------------------------
 # Lang
 # -----------------------------
@@ -348,17 +351,6 @@ if [ -d ~/.zsh/zload/ ]; then
         { while read c; do gencomp $c; done }
     zload $GENCOMPL_FPATH/_*
   }
-
-  # タブ補完時に候補がないときに自動でgcompを実行して補完ファイルを生成する
-  function joeyComplete {
-    read -c COMMAND ARGS
-    if [ ! -n "`declare -f -F $COMMAND`" ]; then
-      if [ "$ARGS" ]; then
-        gcomp $COMMAND
-      fi
-    fi
-  }
-  compctl -f -c -u -r -K joeyComplete -H 0 '' "*" -tn
 fi
 
 # -----------------------------
@@ -382,7 +374,12 @@ fi
 
 # 自動補完を有効にする
 # これはほかの補完ファイルを読み込んだ後に実行しないと意味がない
-autoload -Uz compinit ; compinit
+if [ $(uname -r | grep -i microsoft) ] ; then
+  # wslの場合あまりにも遅いので補完ファイルのセキュアリードオプションを無効化する
+  autoload -Uz compinit ; compinit -C
+else
+  autoload -Uz compinit ; compinit
+fi
 
 # 単語の入力途中でもTab補完を有効化
 setopt complete_in_word
@@ -572,4 +569,9 @@ globalias() {
 }
 zle -N globalias
 bindkey " " globalias
+
+# zshの起動処理の速度調査のスクリプト実行時に表示する設定
+if (which zprof &> /dev/null) ;then
+  zprof | less
+fi
 
