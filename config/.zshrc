@@ -10,9 +10,6 @@
 # -----------------------------
 # General
 # -----------------------------
-# 共通環境変数のファイルの読み込み
-[ -f ~/.read_conf/env ] && source ~/.read_conf/env
-
 # 色を使用
 autoload -Uz colors ; colors
 autoload -Uz add-zsh-hook

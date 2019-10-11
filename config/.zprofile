@@ -1,3 +1,6 @@
+# 共通環境変数のファイルの読み込み
+[ -f ~/.read_conf/env ] && source ~/.read_conf/env
+
 # User specific environment and startup programs
 PATH=$PATH:$HOME/bin
 
