@@ -6,8 +6,7 @@ logo
 # echo $PROJECT_PATH
 
 # 並列実行できるもの
-# dists=('zsh' 'vim' 'shell_common' 'tmux' 'ssh' 'bin' 'bash' 'git' 'fish' 'etc')
-dists=('vim' 'zsh' 'bash' 'shell_common' 'tmux' 'ssh' 'bin' 'git' 'etc')
+dists=('vim' 'zsh' 'bash' 'shell_common' 'tmux' 'ssh' 'bin' 'git' 'etc' 'fish')
 for e in ${dists[@]}; do
   for script in $PROJECT_PATH/$e/*.sh; do
     if [ -f $script ]; then
