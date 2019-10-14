@@ -14,8 +14,8 @@ export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 export FZF_COMPLETION_TRIGGER="**" # default: '**'
 
 # fzfのファイル類のパスを追加
-if [[ ! "$PATH" == *$HOME/bin/.fzf/bin* ]]; then
-   export PATH="${PATH:+${PATH}:}$HOME/bin/.fzf/bin"
+if [[ ! "$PATH" == *$HOME/.config/shell_common/.fzf/bin* ]]; then
+   export PATH="${PATH:+${PATH}:}$HOME/.config/shell_common/.fzf/bin"
 fi
 
 #---------------------------------------------------------------

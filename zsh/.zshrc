@@ -370,7 +370,7 @@ if [ -f ~/.zsh/zsh-completion-generator/zsh-completion-generator.plugin.zsh ]; t
 fi
 
 # fzfのAuto-completion
-[[ $- == *i* ]] && source "$HOME/bin/.fzf/shell/completion.zsh" 2> /dev/null
+[[ $- == *i* ]] && source "$HOME/.config/shell_common/.fzf/shell/completion.zsh" 2> /dev/null
 
 # 自動補完を有効にする
 # これはほかの補完ファイルを読み込んだ後に実行しないと意味がない
@@ -479,7 +479,7 @@ bindkey "^P" history-beginning-search-backward-end
 bindkey "^N" history-beginning-search-forward-end
 
 # fzfのKey bindings
-source "$HOME/bin/.fzf/shell/key-bindings.zsh"
+source "$HOME/.config/shell_common/.fzf/shell/key-bindings.zsh"
 
 # 補完候補のメニュー選択で、矢印キーの代わりにhjklで移動出来るようにする。
 zmodload zsh/complist

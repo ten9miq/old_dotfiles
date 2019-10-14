@@ -114,10 +114,10 @@ export PROMPT_COMMAND="dispatch"
 # -----------------------------
 # Auto-completion
 # -----------------------------
-[[ $- == *i* ]] && source "$HOME/bin/.fzf/shell/completion.bash" 2> /dev/null
+[[ $- == *i* ]] && source "$HOME/.config/shell_common/.fzf/shell/completion.bash" 2> /dev/null
 
 # -----------------------------
 # Key bindings
 # -----------------------------
-source "$HOME/bin/.fzf/shell/key-bindings.bash"
+source "$HOME/.config/shell_common/.fzf/shell/key-bindings.bash"
 
