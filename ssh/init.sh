@@ -3,9 +3,8 @@ THIS_SCRIPT_PATH=$(cd $(dirname ${BASH_SOURCE:-$0}); pwd)
 # PROJECT_PATHなどのsetup時の環境変数の読み込みを行う
 source $THIS_SCRIPT_PATH/../setup_env.sh
 
-if [ "${OS}" = 'linux' ] \
-  || [ "${OS}" = "wsl" ]; then
-  echo '###      ssh config file copy                                               ###'
+if [ `os_type` = 'linux' ] \
+  || [ `os_type` = "wsl" ]; then
 
   copy_target="$HOME/.ssh"
   mkdir -p $copy_target

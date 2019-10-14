@@ -5,9 +5,8 @@ source $THIS_SCRIPT_PATH/../setup_env.sh
 
 # tmuxが存在するかチェック
 if which tmux >/dev/null 2>&1; then
-  if [ "${OS}" = 'linux' ] \
-    || [ "${OS}" = "wsl" ]; then
-    echo '###       tmux config file copy                                             ###'
+  if [ `os_type` = 'linux' ] \
+    || [ `os_type` = "wsl" ]; then
     # tmuxが存在する場合に.tmuxフォルダを作成する
     if [ ! -d "$HOME/.tmux/" ]; then
       mkdir $HOME/.tmux/
