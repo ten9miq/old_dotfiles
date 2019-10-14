@@ -1,12 +1,13 @@
 #!/bin/bash
+echo '###     setup_env start                                                     ###'
 
-echo '###     project env path set                                                ###'
+echo '###        project env path set                                             ###'
 export PROJECT_PATH=$(cd $(dirname ${BASH_SOURCE:-$0}); pwd)
 
-echo '###     error trap read                                                     ###'
+echo '###        error trap start                                                 ###'
 source $PROJECT_PATH/error_trap.sh
 
-echo '###     setup use env set                                                   ###'
+echo '###        setup use env set                                                ###'
 
 # 実行OSの判定処理開始
 if [ "$(uname)" = 'Darwin' ]; then
@@ -28,4 +29,4 @@ fi
 
 export OS=${OS}
 
-
+echo '###     setup_env end                                                       ###'

@@ -1,8 +1,7 @@
 #!/bin/bash
-
 echo '###############################################################################'
 echo '###     All setup execute                                                   ###'
-echo '###         use shell by bash zsh fish                                      ###'
+echo '###       use shell by bash zsh fish                                        ###'
 
 source ./setup_env.sh
 
