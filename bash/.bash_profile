@@ -1,5 +1,5 @@
 # 共通環境変数のファイルの読み込み
-[ -f ~/.read_conf/env ] && source ~/.read_conf/env
+ v[ -f ~/.config/shell_common/env.bash ] && source ~/.config/shell_common/env.bash
 
 export PATH
 unset USERNAME
@@ -10,9 +10,9 @@ unset USERNAME
 set bell-style audible
 
 # 起動時に自動実行されるスクリプト
-[ -f ~/.read_conf/startup ] && source ~/.read_conf/startup
+[ -f ~/.config/shell_common/startup.bash ] && source ~/.config/shell_common/startup.bash
 
-[ -f ~/.read_conf/check_update ] && source ~/.read_conf/check_update
+[ -f ~/.config/shell_common/check_update.bash ] && source ~/.config/shell_common/check_update.bash
 
 # Get the aliases and functions
 if [ -f ~/.bashrc ] ; then

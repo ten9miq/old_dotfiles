@@ -11,9 +11,9 @@
 # General
 # -----------------------------
 # 共通環境変数のファイルの読み込み
-[ -f ~/.read_conf/env ] && source ~/.read_conf/env
+[ -f ~/.config/shell_common/env.bash ] && source ~/.config/shell_common/env.bash
 # 起動時に自動実行されるスクリプト
-[ -f ~/.read_conf/startup ] && source ~/.read_conf/startup
+[ -f ~/.config/shell_common/startup.bash ] && source ~/.config/shell_common/startup.bash
 
 # 色を使用
 autoload -Uz colors ; colors
@@ -333,7 +333,7 @@ setopt hist_save_no_dups
 # functions
 # -----------------------------
 # 関数の読み込み
-[ -f ~/.read_conf/functions ] && source ~/.read_conf/functions
+[ -f ~/.config/shell_common/functions.bash ] && source ~/.config/shell_common/functions.bash
 
 # 補完ファイルの再読み込みプラグインの読み込み
 if [ -d ~/.zsh/zload/ ]; then
@@ -542,7 +542,7 @@ fi
 # alias
 # -----------------------------
 # aliasの読み込み
-[ -f ~/.read_conf/alias ] && source ~/.read_conf/alias
+[ -f ~/.config/shell_common/aliases.bash ] && source ~/.config/shell_common/aliases.bash
 
 # それぞれのaliasに対応
 # setopt no_complete_aliasesでalisaを展開したあととして補完が対応できるはずだが

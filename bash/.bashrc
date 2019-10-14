@@ -57,10 +57,10 @@ export PS1="$PURPLE\u$LIGHT_BLUE@$GREEN`hostname_head3` `EXT_COLOR 39`\w$LIGHT_G
 shopt -s autocd
 
 # 共通aliasの読み込み
-[ -f ~/.read_conf/alias ] && source ~/.read_conf/alias
+[ -f ~/.config/shell_common/aliases.bash ] && source ~/.config/shell_common/aliases.bash
 
 # functionの共通関数の読み込み
-[ -f ~/.read_conf/functions ] && source ~/.read_conf/functions
+[ -f ~/.config/shell_common/functions.bash ] && source ~/.config/shell_common/functions.bash
 
 #---------------------------------------------------------------
 # cd autocd pushd popd でディレクトリ移動したら自動でlsコマンドを実行
