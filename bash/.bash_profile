@@ -1,5 +1,5 @@
 # 共通環境変数のファイルの読み込み
- v[ -f ~/.config/shell_common/env.bash ] && source ~/.config/shell_common/env.bash
+[ -f ~/.config/shell_common/env.bash ] && source ~/.config/shell_common/env.bash
 
 export PATH
 unset USERNAME
