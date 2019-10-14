@@ -19,17 +19,19 @@ else
 
   if [ "${OS}" = 'Linux' ] ; then
     # Linuxの場合~/dotfile/の更新がないかチェックし、更新あればgit pullしてsetup.shを実行する
-    \cd $HOME/dotfiles
-    git fetch -p
-    git checkout -q master
-    latest_rev=$(git ls-remote origin HEAD | awk '{print $1}')
-    current_rev=$(git rev-parse HEAD)
-    if [ "$latest_rev" != "$current_rev" ]; then
-      # 最新じゃない場合には更新処理を行う
-      git reset --hard $(git log --pretty=format:%H | head -1)
-      git pull
-      ./setup.sh
+    if [ -d $HOME/dotfiles ]; then
+      \cd $HOME/dotfiles
+      git fetch -p
+      git checkout -q master
+      latest_rev=$(git ls-remote origin HEAD | awk '{print $1}')
+      current_rev=$(git rev-parse HEAD)
+      if [ "$latest_rev" != "$current_rev" ]; then
+        # 最新じゃない場合には更新処理を行う
+        git reset --hard $(git log --pretty=format:%H | head -1)
+        git pull
+        ./setup.sh
+      fi
+      \cd -
     fi
-    \cd -
   fi
 fi
