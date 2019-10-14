@@ -1,10 +1,7 @@
 #!/bin/bash
-echo '###     shell common init start                                             ###'
 THIS_SCRIPT_PATH=$(cd $(dirname ${BASH_SOURCE:-$0}); pwd)
-if [ -z $PROJECT_PATH ]; then
-  # PROJECT_PATHなどのsetup時の環境変数の読み込みを行う
-  source $THIS_SCRIPT_PATH/../setup_env.sh
-fi
+# PROJECT_PATHなどのsetup時の環境変数の読み込みを行う
+source $THIS_SCRIPT_PATH/../setup_env.sh
 
 # # aliasなどzshとbashで共通できるもの
 copy_target="$HOME/.config/shell_common"
@@ -19,4 +16,4 @@ do
   cp $find_path $copy_target/$relative_path;
 done
 
-echo '###     shell common init end                                               ###'
+exit $?

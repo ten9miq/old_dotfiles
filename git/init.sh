@@ -1,10 +1,8 @@
 #!/bin/bash
-echo '###     git init start                                                      ###'
 THIS_SCRIPT_PATH=$(cd $(dirname ${BASH_SOURCE:-$0}); pwd)
-if [ -z $PROJECT_PATH ]; then
-  # PROJECT_PATHなどのsetup時の環境変数の読み込みを行う
-  source $THIS_SCRIPT_PATH/../setup_env.sh
-fi
+# PROJECT_PATHなどのsetup時の環境変数の読み込みを行う
+source $THIS_SCRIPT_PATH/../setup_env.sh
+
 
 \cp $THIS_SCRIPT_PATH/.gitconfig ~/
 
@@ -46,4 +44,5 @@ EOF
     echo '###       Your platform ($(uname -a)) is not supported.                     ###'
   fi
 fi
-echo '###     git init end                                                        ###'
+
+exit $?

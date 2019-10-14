@@ -1,10 +1,7 @@
 #!/bin/bash
-echo '###     bin init start                                                      ###'
 THIS_SCRIPT_PATH=$(cd $(dirname ${BASH_SOURCE:-$0}); pwd)
-if [ -z $PROJECT_PATH ]; then
-  # PROJECT_PATHなどのsetup時の環境変数の読み込みを行う
-  source $THIS_SCRIPT_PATH/../setup_env.sh
-fi
+# PROJECT_PATHなどのsetup時の環境変数の読み込みを行う
+source $THIS_SCRIPT_PATH/../setup_env.sh
 
 copy_target="$HOME/bin"
 mkdir -p $copy_target
@@ -18,4 +15,5 @@ do
   cp $find_path $copy_target/$relative_path;
 done
 chmod -R +x $copy_target
-echo '###     bin init end                                                        ###'
+
+exit $?

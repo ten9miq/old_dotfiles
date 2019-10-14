@@ -1,10 +1,7 @@
 #!/bin/bash
-echo '###     ssh init start                                                      ###'
 THIS_SCRIPT_PATH=$(cd $(dirname ${BASH_SOURCE:-$0}); pwd)
-if [ -z $PROJECT_PATH ]; then
-  # PROJECT_PATHなどのsetup時の環境変数の読み込みを行う
-  source $THIS_SCRIPT_PATH/../setup_env.sh
-fi
+# PROJECT_PATHなどのsetup時の環境変数の読み込みを行う
+source $THIS_SCRIPT_PATH/../setup_env.sh
 
 if [ "${OS}" = 'linux' ] \
   || [ "${OS}" = "wsl" ]; then
@@ -25,4 +22,4 @@ if [ "${OS}" = 'linux' ] \
   chmod 600 $HOME/.ssh/config
 fi
 
-echo '###     ssh init end                                                        ###'
+exit $?
