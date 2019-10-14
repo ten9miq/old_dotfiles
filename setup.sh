@@ -2,8 +2,6 @@
 # setup時に必要な環境変数やエラートラップの実行
 source ./setup_env.sh
 logo
-# echo $OS
-# echo $PROJECT_PATH
 
 # 並列実行できるもの
 dists=('vim' 'zsh' 'bash' 'shell_common' 'tmux' 'ssh' 'bin' 'git' 'etc' 'fish')
