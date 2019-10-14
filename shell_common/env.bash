@@ -25,7 +25,7 @@ fi
 # --no-init lessを閉じたときに表示内容を消さない
 # --quit-if-one-screen 表示内容が1ページの時cat的な動作をする --no-initがないと表示せずに閉じられてしまう
 #  →上記を組み合わせると長いログがそのままshell上に残るのでsmartlessというのを使う (lessのラッパー  1画面に収まるのはcatのように動く
-export LESS='--squeeze-blank-lines --LINE-NUMBERS --ignore-case --LONG-PROMPT --RAW-CONTROL-CHARS --HILITE-UNREAD  --window=4 --tabs=4 --shift=15'
+export LESS='--squeeze-blank-lines --LINE-NUMBERS --ignore-case --LONG-PROMPT --RAW-CONTROL-CHARS --HILITE-UNREAD --window=-4 --tabs=4 --shift=20'
 export PAGER='less --line-numbers' # manなどのページャーとしてlessを使用する $LESSが有効 行番号は非表示
 #less上での色 色 0黒,1赤,2緑,3黄色,4青,5ピンク,6水色,7白
 export LESS_TERMCAP_mb=$(tput bold)                # begin blinking
