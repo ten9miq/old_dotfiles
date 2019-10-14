@@ -2,7 +2,7 @@
 echo '###     bash init start                                                     ###'
 if [ -z $PROJECT_PATH ]; then
   # PROJECT_PATHなどのsetup時の環境変数の読み込みを行う
-  export THIS_SCRIPT_PATH=$(cd $(dirname ${BASH_SOURCE:-$0}); pwd)
+  local THIS_SCRIPT_PATH=$(cd $(dirname ${BASH_SOURCE:-$0}); pwd)
   source $THIS_SCRIPT_PATH/../setup_env.sh
 fi
 
