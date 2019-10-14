@@ -8,7 +8,7 @@ source $THIS_SCRIPT_PATH/../setup_env.sh
 
 # .gitconfig.localが存在しない場合に生成する
 if [ ! -e "${HOME}/.gitconfig.local" ]; then
-  echo '###       .gitconfig.localがないので作成します。                            ###'
+  log '.gitconfig.localがないので作成します。'
 
     cat <<EOF > "${HOME}/.gitconfig.local"
 [user]
@@ -19,6 +19,7 @@ if [ ! -e "${HOME}/.gitconfig.local" ]; then
 EOF
 
   if [ `os_type` == 'linux' ]; then
+      log 'linux git credential cache select.'
       cat <<EOF >> "${HOME}/.gitconfig.local"
 [credential]
   # helper = store # PWが平文で$HOME配下に保存されるので注意 cacheの方を推奨
@@ -26,6 +27,7 @@ EOF
     helper = cache --timeout=36000  # 36000=10時間 デフォは15分
 EOF
   elif [ `os_type` == 'wsl' ]; then
+      log 'wsl git credential store select.'
       cat <<EOF >> "${HOME}/.gitconfig.local"
 [credential]
     helper = store # PWが平文で$HOME配下に保存されるので注意 cacheの方を推奨
@@ -33,12 +35,13 @@ EOF
   # helper = cache --timeout=36000  # 36000=10時間 デフォは15分
 EOF
   elif [ `os_type` == 'cygwin' ]; then
+    log 'windows git credential wincred select.'
     cat <<EOF >> "${HOME}/.gitconfig.local"
 [credential]
     helper = wincred
 EOF
   else
-    echo '###       Your platform ($(uname -a)) is not supported.                     ###'
+    error 'Your platform ($(uname -a)) is not supported.'
   fi
 fi
 
