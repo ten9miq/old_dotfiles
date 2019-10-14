@@ -10,11 +10,6 @@
 # -----------------------------
 # General
 # -----------------------------
-# 共通環境変数のファイルの読み込み
-[ -f ~/.config/shell_common/env.bash ] && source ~/.config/shell_common/env.bash
-# 起動時に自動実行されるスクリプト
-[ -f ~/.config/shell_common/startup.bash ] && source ~/.config/shell_common/startup.bash
-
 # 色を使用
 autoload -Uz colors ; colors
 autoload -Uz add-zsh-hook
