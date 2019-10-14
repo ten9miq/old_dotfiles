@@ -9,6 +9,7 @@ source ./setup_env.sh
 # echo $PROJECT_PATH
 
 source $PROJECT_PATH/shell_common/init.sh
+source $PROJECT_PATH/tmux/init.sh
 # source $PROJECT_PATH/bash/init.sh
 # source $PROJECT_PATH/zsh/init.sh
 
